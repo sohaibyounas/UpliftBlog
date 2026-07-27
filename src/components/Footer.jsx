@@ -77,7 +77,7 @@ export default function Footer() {
                     <li key={link}>
                       <a
                         href="#"
-                        className="text-white/80 text-[16px] hover:text-white transition underline-offset-4 hover:underline cursor-pointer"
+                        className="text-white hover:text-white/80 text-[16px] transition underline-offset-4 hover:underline cursor-pointer"
                       >
                         {link}
                       </a>
@@ -169,14 +169,14 @@ export default function Footer() {
               <div className="flex items-center gap-6">
                 <a
                   href="#"
-                  className="text-white/70 hover:text-white text-[12px] sm:text-[14px] underline underline-offset-2 transition-colors"
+                  className="text-white hover:text-white/80 text-[12px] sm:text-[14px] underline underline-offset-2 transition-colors"
                 >
                   App Store
                 </a>
 
                 <a
                   href="#"
-                  className="text-white/70 hover:text-white text-[12px] sm:text-[14px] underline underline-offset-2 transition-colors"
+                  className="text-white hover:text-white/80 text-[12px] sm:text-[14px] underline underline-offset-2 transition-colors"
                 >
                   Google Play
                 </a>

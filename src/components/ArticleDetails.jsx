@@ -122,7 +122,7 @@ export default function ArticleDetail() {
           egestas dignissim eu nunc. Id pulvinar enim volutpat tellus. Cras
           tellus ac dui at sed. Suspendisse feugiat scelerisque et, viverra urna
           imperdiet non malesuada. In massa id tellus natoque augue in et, et.
-          <span className="text-[#404040] font-medium ml-1">
+          <span className="text-[#404040] font-medium ml-1 underline">
             Cras tellus ac dui at sed.
           </span>
         </p>
@@ -152,7 +152,7 @@ export default function ArticleDetail() {
                 key={label}
                 aria-label={label}
                 title={label}
-                className="flex items-center justify-center rounded-full border border-[#DCDCDC] p-[12px] hover:bg-[#DCDCDC] transition-all duration-200"
+                className="flex items-center justify-center rounded-full border border-[#DCDCDC] p-[12px] hover:bg-[#DCDCDC] transition-all duration-300 hover:scale-110 hover:-translate-y-1"
               >
                 <img src={icon} alt={label} className="w-[18px] h-[18px]" />
               </button>

@@ -8,29 +8,30 @@ const Image = "/images/image-33.svg";
 
 export default function HeroSection() {
   return (
-    <section className="w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <div className="flex items-center gap-3 mb-2">
-        <IconBadge
-          src={Resources}
-          alt="Resource Center"
-          text="Resource Center"
-        />
-      </div>
+    <section className="w-full mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 sm:gap-0 mb-9">
+        <div className="flex flex-col gap-2 sm:gap-3">
+          <IconBadge
+            src={Resources}
+            alt="Resource Center"
+            text="Resource Center"
+          />
+          <h1 className="text-[20px] sm:text-[28px] lg:text-[36px] font-semibold text-[#232323]">
+            Articles & News
+          </h1>
+        </div>
 
-      {/* Heading Row */}
-      <div className="flex items-center justify-between mb-7">
-        <h1 className="text-[16px] sm:text-[28px] lg:text-[36px] font-semibold text-[#232323]">
-          Articles & News
-        </h1>
-        <CustomButton
-          text="Browse articles"
-          variant="outline"
-          onClick={() =>
-            document
-              .getElementById("latest-articles")
-              ?.scrollIntoView({ behavior: "smooth" })
-          }
-        />
+        <div className="w-full sm:w-auto flex justify-start sm:justify-end">
+          <CustomButton
+            text="Browse articles"
+            variant="outline"
+            onClick={() =>
+              document
+                .getElementById("latest-articles")
+                ?.scrollIntoView({ behavior: "smooth" })
+            }
+          />
+        </div>
       </div>
 
       {/* Hero Card */}
@@ -39,7 +40,7 @@ export default function HeroSection() {
           <img src={Image} alt="Image" className="w-full h-full object-cover" />
 
           {/* Badge */}
-          <div className="absolute left-4 right-4 top-4 xs:top-6 sm:top-1/2 sm:-translate-y-1/2 sm:left-10 sm:right-auto w-auto sm:w-110 lg:w-129 bg-white rounded-3xl sm:rounded-4xl p-5 sm:p-8">
+          <div className="absolute left-4 right-4 top-15 sm:top-1/2 sm:-translate-y-1/2 sm:left-[80px] sm:right-auto w-auto sm:w-[516px] bg-white rounded-3xl sm:rounded-4xl p-5 sm:p-8">
             <span className="inline-flex items-center justify-center h-8.5 px-3.5 py-1.5 rounded-full bg-[#0A5A37] text-white text-[16px] font-medium leading-5 tracking-[-0.01em]">
               Featured
             </span>

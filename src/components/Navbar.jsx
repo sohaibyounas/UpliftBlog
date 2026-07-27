@@ -56,12 +56,12 @@ export default function Navbar() {
         <div className="hidden lg:flex items-center gap-3">
           <Link
             href="/"
-            className="text-[16px] font-medium text-[#232323] hover:text-[#0A5A37] transition-colors border border-[#DCDCDC] rounded-full px-[10px] py-[3px]"
+            className="text-[16px] font-medium text-[#232323] hover:text-[#0A5A37] transition-colors border border-[#DCDCDC] rounded-full px-[14px] py-[8px]"
           >
             Login
           </Link>
 
-          <CustomButton text="Start Free Trail" variant="green" />
+          <CustomButton text="Start Free Trial" variant="green" />
         </div>
 
         {/* Mobile Toggle Button */}

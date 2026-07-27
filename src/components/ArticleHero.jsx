@@ -47,7 +47,7 @@ export default function ArticleHero() {
         </div>
 
         {/* Heading & Button */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
           <h1 className="text-[18px] sm:text-[36px] font-bold text-[#232323] leading-tight max-w-[552px]">
             Exercise health benefits: How running changes your brain
           </h1>
@@ -56,7 +56,7 @@ export default function ArticleHero() {
             text="Start Reading"
             variant="outline"
             style={{ cursor: "pointer" }}
-            className="self-start sm:self-auto flex-shrink-0 py-1.5 sm:py-2 pl-4 sm:pl-5 pr-1.5 sm:pr-2"
+            className="self-start sm:self-auto flex-shrink-0 py-1.5 pl-4 sm:pl-5 pr-1.5 sm:pr-2"
           />
         </div>
       </div>

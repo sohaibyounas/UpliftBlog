@@ -1,8 +1,41 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useRef } from "react";
 import IconBadge from "./IconBadge";
 import { IoIosCheckmarkCircleOutline } from "react-icons/io";
 
 export default function ComparisonTable() {
+  const sectionRef = useRef(null);
+  const tableScrollRef = useRef(null);
+
+  useEffect(() => {
+    const scrollEl = tableScrollRef.current;
+    if (!scrollEl) return;
+
+    const onWheel = (event) => {
+      const deltaY = event.deltaY;
+      const atTop = scrollEl.scrollTop <= 0;
+      const atBottom =
+        scrollEl.scrollTop + scrollEl.clientHeight >= scrollEl.scrollHeight;
+
+      if ((deltaY < 0 && atTop) || (deltaY > 0 && atBottom)) {
+        return;
+      }
+
+      event.preventDefault();
+      event.stopPropagation();
+
+      scrollEl.scrollTop += deltaY;
+    };
+
+    scrollEl.addEventListener("wheel", onWheel, {
+      passive: false,
+      capture: true,
+    });
+    return () =>
+      scrollEl.removeEventListener("wheel", onWheel, { capture: true });
+  }, []);
+
   const comparisonCategories = [
     {
       title: "Core tools",
@@ -194,26 +227,27 @@ export default function ComparisonTable() {
   ];
 
   return (
-    <section className="w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      {/* Header */}
-      <div className="text-center mb-5">
-        <div className="inline-flex items-center justify-center mb-3">
-          <IconBadge alt="Resource Center" text="COMPRESSION" />
+    <section className="w-full mx-auto px-4 sm:px-6 lg:px-8 pt-[12px]">
+      <div ref={sectionRef} className="rounded-3xl bg-white">
+        <div className="bg-white text-center pt-[12px] pb-2">
+          <div className="inline-flex items-center justify-center mb-3">
+            <IconBadge alt="Resource Center" text="COMPRESSION" />
+          </div>
+          <h2 className="text-[16px] sm:text-[36px] font-semibold text-[#232323]">
+            Compare feature across subscription
+          </h2>
         </div>
-        <h2 className="text-[16px] sm:text-[36px] font-semibold text-[#232323]">
-          Compare feature across subscription
-        </h2>
-      </div>
 
-      <div className="bg-white rounded-3xl overflow-hidden">
-        <div className="overflow-x-auto">
+        <div
+          ref={tableScrollRef}
+          className="max-h-[520px] overflow-y-auto overflow-x-auto scrollbar-hidden"
+        >
           <table className="w-full text-left border-collapse min-w-[750px]">
-            {/* Table Header */}
-            <thead>
+            <thead className="sticky top-0 z-20 bg-white">
               <tr>
                 <th className="p-4 w-2/6"></th>
                 <th className="p-4 text-center w-1/6">
-                  <span className="block text-[20px] sm:text-[22px] font-bold text-[#232323] mb-3">
+                  <span className="block text-[20px] sm:text-[22px] font-semibold text-[#232323] mb-3">
                     Free trail
                   </span>
                   <button className="w-full h-[38px] px-4 rounded-full bg-[#95EA00] text-[#232323] font-semibold text-[9px] sm:text-[16px] border-2 border-[#74D800] transition-colors hover:bg-[#85d400] flex items-center justify-center box-border">
@@ -221,7 +255,7 @@ export default function ComparisonTable() {
                   </button>
                 </th>
                 <th className="p-4 text-center w-1/6">
-                  <span className="block text-[20px] sm:text-[22px] font-bold text-[#232323] mb-3">
+                  <span className="block text-[20px] sm:text-[22px] font-semibold text-[#232323] mb-3">
                     Starter
                   </span>
                   <button className="w-full h-[38px] px-4 rounded-full bg-gray-50/50 border border-[#CBCBCB] text-[#4F4F4F] font-medium text-[9px] sm:text-[16px] hover:bg-gray-100 transition-colors flex items-center justify-center box-border">
@@ -229,7 +263,7 @@ export default function ComparisonTable() {
                   </button>
                 </th>
                 <th className="p-4 text-center w-1/6">
-                  <span className="block text-[20px] sm:text-[22px] font-bold text-[#232323] mb-3">
+                  <span className="block text-[20px] sm:text-[22px] font-semibold text-[#232323] mb-3">
                     Scale
                   </span>
                   <button className="w-full h-[38px] px-4 rounded-full bg-gray-50/50 border border-[#CBCBCB] text-[#4F4F4F] font-medium text-[9px] sm:text-[16px] hover:bg-gray-100 transition-colors flex items-center justify-center box-border">
@@ -237,7 +271,7 @@ export default function ComparisonTable() {
                   </button>
                 </th>
                 <th className="p-4 text-center w-1/6">
-                  <span className="block text-[20px] sm:text-[22px] font-bold text-[#232323] mb-3">
+                  <span className="block text-[20px] sm:text-[22px] font-semibold text-[#232323] mb-3">
                     Pro
                   </span>
                   <button className="w-full h-[38px] px-4 rounded-full bg-gray-50/50 border border-[#CBCBCB] text-[#4F4F4F] font-medium text-[9px] sm:text-[16px] hover:bg-gray-100 transition-colors flex items-center justify-center box-border">
@@ -247,12 +281,10 @@ export default function ComparisonTable() {
               </tr>
             </thead>
 
-            {/* Table Body */}
             <tbody>
               {comparisonCategories.map((category, catIdx) => (
                 <React.Fragment key={catIdx}>
-                  {/* Category Row */}
-                  <tr className="bg-[#FAF9F6]/80 border-b border-[#EEEEEE]">
+                  <tr className="bg-[#FAFAFA] border-b border-[#EEEEEE]">
                     <td
                       colSpan={5}
                       className="py-2.5 px-6 text-[18px] font-medium text-[#404040] tracking-wide"
@@ -260,12 +292,10 @@ export default function ComparisonTable() {
                       {category.title}
                     </td>
                   </tr>
-
-                  {/* Features Rows */}
                   {category.features.map((feature, featIdx) => (
                     <tr
                       key={featIdx}
-                      className="border-b border-gray-50 hover:bg-gray-50/50 transition-colors"
+                      className="border-b border-[#EEEEEE] hover:bg-gray-50/50 transition-colors"
                     >
                       <td className="py-3.5 px-6 text-[13px] sm:text-[18px] font-medium text-[#404040]">
                         {feature.name}

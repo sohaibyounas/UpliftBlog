@@ -7,6 +7,7 @@ import { IoIosCheckmarkCircleOutline } from "react-icons/io";
 
 export default function PricingHero() {
   const [isYearly, setIsYearly] = useState(false);
+  const [selectedPlanIndex, setSelectedPlanIndex] = useState(0);
 
   const plans = [
     {
@@ -16,8 +17,6 @@ export default function PricingHero() {
       price: isYearly ? "$0" : "$0",
       period: isYearly ? "/year" : "/month",
       buttonText: "Start with free Trail",
-      buttonStyle: "bg-black text-white hover:bg-gray-800",
-      highlighted: true,
       badge: "14-day free trial",
       info: "No credit card needed",
       clientCapValue: "20",
@@ -49,9 +48,7 @@ export default function PricingHero() {
       price: isYearly ? "$23" : "$29",
       period: isYearly ? "/year" : "/month",
       buttonText: "Start with Starter",
-      buttonStyle:
-        "bg-white border border-gray-300 text-gray-800 hover:border-gray-400",
-      highlighted: false,
+      badge: "Popular Choice",
       info: "Up to 20 clients",
       clientCapValue: "20",
       features: [
@@ -82,9 +79,7 @@ export default function PricingHero() {
       price: isYearly ? "$39" : "$49",
       period: isYearly ? "/year" : "/month",
       buttonText: "Start with Scale",
-      buttonStyle:
-        "bg-white border border-gray-300 text-gray-800 hover:border-gray-400",
-      highlighted: false,
+      badge: "Best Value",
       info: "Up to 50 clients",
       clientCapValue: "50",
       features: [
@@ -115,9 +110,7 @@ export default function PricingHero() {
       price: isYearly ? "$63" : "$79",
       period: isYearly ? "/year" : "/month",
       buttonText: "Start with Pro",
-      buttonStyle:
-        "bg-white border border-gray-300 text-gray-800 hover:border-gray-400",
-      highlighted: false,
+      badge: "Enterprise",
       info: "Unlimited",
       clientCapValue: "Unlimited",
       features: [
@@ -144,16 +137,16 @@ export default function PricingHero() {
   ];
 
   return (
-    <section className="w-full mx-auto px-4 sm:px-6 lg:px-8 sm:py-8">
+    <section className="w-full mx-auto px-4 sm:px-6 lg:px-8 sm:pt-8 sm:pb-2">
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
         {/* header & title */}
         <div>
-          <div className="flex items-center gap-3 mb-2">
+          <div className="flex items-center gap-3 mb-5">
             <IconBadge alt="Resource Center" text="Pricing" />
           </div>
 
           <div>
-            <h1 className="text-[24px] sm:text-[24px] sm:text-[36px] font-semibold text-[#232323] tracking-tight leading-tight">
+            <h1 className="text-[24px] sm:text-[36px] font-semibold text-[#232323] tracking-tight leading-tight">
               Simple pricing.
               <br />
               No Surprises.
@@ -163,7 +156,7 @@ export default function PricingHero() {
 
         {/* tabs monthly / yearly */}
         <div className="relative flex flex-col items-end md:flex-row md:items-center gap-2 md:gap-4 self-start md:self-center w-full md:w-auto">
-          <span className="text-[13px] sm:text-[15px] font-semibold text-[#18181b] bg-[#95EA00]/20 text-[#426a00] px-3 py-1 rounded-full border border-[#95EA00]/40 shrink-0 absolute -top-3 right-0 md:static md:top-auto md:right-auto">
+          <span className="text-[13px] sm:text-[20px] font-medium text-[#18181b] bg-[#95EA00]/20 text-[#426a00] px-3 py-1.5 rounded-full border border-[#95EA00]/40 shrink-0 absolute -top-3 right-0 md:static md:top-auto md:right-auto">
             Save 20%
           </span>
 
@@ -195,8 +188,9 @@ export default function PricingHero() {
       </div>
 
       {/* packages */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-2 sm:mb-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-2 sm:mb-10 pt-4">
         {plans.map((plan, planIdx) => {
+          const isSelected = selectedPlanIndex === planIdx;
           const clientCapIdx = plan.features.findIndex(
             (f) => f.toLowerCase() === "client cap",
           );
@@ -204,15 +198,16 @@ export default function PricingHero() {
           return (
             <div
               key={planIdx}
-              className={`relative rounded-[24px] p-6 sm:p-[20px] flex flex-col justify-between transition-all duration-200 ${
-                plan.highlighted
-                  ? "border border-[#63B800] bg-white"
-                  : "border border-[#EEEEEE] bg-white"
+              onClick={() => setSelectedPlanIndex(planIdx)}
+              className={`relative rounded-[24px] p-6 sm:p-[20px] flex flex-col justify-between cursor-pointer transition-all duration-300 ease-in-out transform ${
+                isSelected
+                  ? "border-2 border-[#63B800] bg-white"
+                  : "border border-[#EEEEEE] bg-white hover:border-gray-300"
               }`}
             >
-              {plan.badge && (
-                <div className="absolute -top-4.5 left-1/2 -translate-x-1/2 bg-[#95EA00] text-black text-[14px] font-semibold px-3 py-1 rounded-full border-2 border-[#74D800]">
-                  {plan.badge}
+              {isSelected && (
+                <div className="absolute -top-4.5 left-1/2 -translate-x-1/2 bg-[#95EA00] text-black text-[14px] font-semibold px-3 py-1 rounded-full border-2 border-[#74D800] transition-all duration-300 z-20 whitespace-nowrap">
+                  {plan.buttonText}
                 </div>
               )}
               <div>
@@ -229,7 +224,7 @@ export default function PricingHero() {
                     {plan.subtitle}
                   </p>
                   <div className="flex items-center">
-                    <span className="text-[34px] sm:text-[40px] font-semibold tracking-tight text-[#232323]">
+                    <span className="text-[34px] sm:text-[40px] font-semibold tracking-tight text-[#232323] transition-all duration-300">
                       {plan.price}
                     </span>
                     <span className="text-[16px] font-medium text-[#4F4F4F] ml-1">
@@ -237,26 +232,30 @@ export default function PricingHero() {
                     </span>
                   </div>
                 </div>
+
                 <button
-                  className={`w-full py-[6px] pr-[6px] pl-[12px] rounded-full text-[14px] font-medium transition-colors mb-8 flex items-center justify-between gap-2 ${
-                    plan.highlighted
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setSelectedPlanIndex(planIdx);
+                  }}
+                  className={`w-full py-[6px] pr-[6px] pl-[12px] rounded-full text-[14px] font-medium transition-all duration-300 mb-8 flex items-center justify-between gap-2 ${
+                    isSelected
                       ? "bg-black text-white border-2 border-[#8F8F8F]"
                       : "bg-transparent text-[#232323] border border-[#EEEEEE]"
                   }`}
                 >
                   <span>{plan.buttonText}</span>
                   <span
-                    className={`w-[31px] h-[31px] rounded-full flex items-center justify-center shrink-0 ${
-                      plan.highlighted ? "bg-[#93FF16]" : "bg-transparent"
+                    className={`w-[31px] h-[31px] rounded-full flex items-center justify-center shrink-0 transition-colors duration-300 ${
+                      isSelected ? "bg-[#93FF16]" : "bg-transparent"
                     }`}
                   >
                     <LuChevronsRight
-                      className={
-                        plan.highlighted ? "text-black" : "text-[#232323]"
-                      }
+                      className={isSelected ? "text-black" : "text-[#232323]"}
                     />
                   </span>
                 </button>
+
                 <div className="border-t border-[#EEEEEE] pt-6">
                   <p className="text-[16px] font-semibold text-[#232323] tracking-wider mb-4">
                     Features
@@ -292,7 +291,6 @@ export default function PricingHero() {
                             </span>
                           </div>
 
-                          {/* Show Client Cap numeric/unlimited label on the right side */}
                           {isClientCap && (
                             <span className="text-[14px] font-semibold text-[#232323] shrink-0">
                               {plan.clientCapValue}

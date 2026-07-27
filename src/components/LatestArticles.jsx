@@ -106,10 +106,10 @@ export default function LatestArticles() {
       : articles.filter((item) => item.category === activeTab);
 
   return (
-    <section id="latest-articles" className="w-full mx-auto px-4 lg:px-8 pt-14">
+    <section id="latest-articles" className="w-full mx-auto px-4 lg:px-8 pt-11">
       {/* Header */}
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-14">
-        <h2 className="text-[36px] font-bold text-[#232323]">
+        <h2 className="text-[36px] font-semibold text-[#232323]">
           Latest articles
         </h2>
 
@@ -118,10 +118,10 @@ export default function LatestArticles() {
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`px-[10px] py-[3px] rounded-full border transition-all duration-300 text-sm font-medium
+              className={`px-[10px] py-[3px] w-[90px] h-[38px] rounded-full border transition-all duration-300 text-[16px] font-semibold
               ${
                 activeTab === tab
-                  ? "bg-[#232323] text-white border-[#232323]"
+                  ? "bg-[#232323] text-white border-2 border-[#232323]"
                   : "bg-white border-[#D9D9D9] text-[#232323]"
               }`}
             >
@@ -132,7 +132,7 @@ export default function LatestArticles() {
       </div>
 
       {/* Articles */}
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-8 gap-y-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-[20px] gap-y-[24px] pb-[3px]">
         {filtered.map((article) => (
           <Link
             key={article.id}

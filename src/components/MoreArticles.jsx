@@ -78,7 +78,7 @@ export default function MoreArticles() {
             <a
               key={article.id}
               href="#"
-              className="bg-white rounded-2xl overflow-hidden transition-shadow group"
+              className="bg-white rounded-[16px] overflow-hidden transition-shadow group"
             >
               {/* Thumbnail */}
               <div className="overflow-hidden h-48">
@@ -92,7 +92,7 @@ export default function MoreArticles() {
               </div>
 
               {/* Card body */}
-              <div className="pl-0 pr-5, py-3 sm:p-5">
+              <div className="pl-0 py-3 sm:py-5">
                 <h3 className="font-semibold text-[#232323] text-[15px] sm:text-[24px] mb-0 sm:mb-2 transition-colors">
                   {article.title}
                 </h3>
