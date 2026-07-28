@@ -32,17 +32,24 @@
 
 body {
   font-family: "General Sans", sans-serif;
+  overflow-x: hidden;
 }
 
 button {
   cursor: pointer;
 }
 
-.scrollbar-hidden {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+.scrollbar-hidden,
+html.scrollbar-hidden,
+body.scrollbar-hidden {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
 }
 
-.scrollbar-hidden::-webkit-scrollbar {
-  display: none;
+.scrollbar-hidden::-webkit-scrollbar,
+html.scrollbar-hidden::-webkit-scrollbar,
+body.scrollbar-hidden::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
 }

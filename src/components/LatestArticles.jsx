@@ -106,7 +106,10 @@ export default function LatestArticles() {
       : articles.filter((item) => item.category === activeTab);
 
   return (
-    <section id="latest-articles" className="w-full mx-auto px-4 lg:px-8 pt-11">
+    <section
+      id="latest-articles"
+      className="mx-auto w-full px-4 lg:px-12 pt-11 scroll-mt-20"
+    >
       {/* Header */}
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-14">
         <h2 className="text-[36px] font-semibold text-[#232323]">
@@ -132,7 +135,10 @@ export default function LatestArticles() {
       </div>
 
       {/* Articles */}
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-[20px] gap-y-[24px] pb-[3px]">
+      <div
+        className="grid gap-x-[20px] gap-y-[24px] pb-[3px]"
+        style={{ gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))" }}
+      >
         {filtered.map((article) => (
           <Link
             key={article.id}
@@ -141,7 +147,7 @@ export default function LatestArticles() {
           >
             <article>
               {/* Image */}
-              <div className="relative h-[352px] overflow-hidden rounded-[24px]">
+              <div className="relative w-full aspect-[411/310] overflow-hidden rounded-[20px]">
                 <Image
                   src={article.image}
                   alt={article.title}

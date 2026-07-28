@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef } from "react";
 import Image from "next/image";
 import { IoIosArrowForward } from "react-icons/io";
 
@@ -38,50 +39,105 @@ const articles = [
     alt: "Group fitness session on beach",
     date: "Aug 20, 2024",
   },
+  {
+    id: 4,
+    category: "Nutrition",
+    title: "Healthy Eating Habits",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore.",
+    image: Card1,
+    alt: "Bowl of fresh fruits and vegetables",
+    date: "Aug 15, 2024",
+  },
+  {
+    id: 5,
+    category: "Fitness",
+    title: "Strength Training Basics",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore.",
+    image: Card2,
+    alt: "Man lifting weights in gym",
+    date: "Aug 10, 2024",
+  },
+  {
+    id: 6,
+    category: "Wellness",
+    title: "Mindfulness & Meditation",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore.",
+    image: Card3,
+    alt: "Person meditating in nature",
+    date: "Aug 5, 2024",
+  },
 ];
 
-function NavArrowButton({ className = "" }) {
+function NavArrowButton({ className = "", onPrev, onNext }) {
   return (
-    <button
-      onClick={() =>
-        document
-          .getElementById("latest-articles")
-          ?.scrollIntoView({ behavior: "smooth" })
-      }
+    <div
       className={`flex items-center gap-2 border-2 border-[#DCDCDC] rounded-full py-[6px] sm:py-[9px] px-[6px] sm:px-[8px] hover:bg-gray-50 transition ${className}`}
     >
-      <span className="flex items-center justify-center w-[20px] sm:w-[30px] h-[20px] sm:h-[30px] rounded-full bg-[#232323]">
+      <button
+        onClick={onPrev}
+        aria-label="Previous"
+        className="flex items-center justify-center w-[20px] sm:w-[30px] h-[20px] sm:h-[30px] rounded-full bg-[#232323]"
+      >
         <IoIosArrowForward className="rotate-180 text-white text-[14px] sm:text-[18px]" />
-      </span>
-      <span className="flex items-center justify-center w-[20px] sm:w-[30px] h-[20px] sm:h-[30px] rounded-full bg-[#232323]">
+      </button>
+      <button
+        onClick={onNext}
+        aria-label="Next"
+        className="flex items-center justify-center w-[20px] sm:w-[30px] h-[20px] sm:h-[30px] rounded-full bg-[#232323]"
+      >
         <IoIosArrowForward className="text-white text-[14px] sm:text-[18px]" />
-      </span>
-    </button>
+      </button>
+    </div>
   );
 }
 
 export default function MoreArticles() {
+  const scrollRef = useRef(null);
+
+  const scrollByAmount = (direction) => {
+    const container = scrollRef.current;
+    if (!container) return;
+
+    const card = container.querySelector("[data-card]");
+    const cardWidth = card ? card.offsetWidth + 24 : 300;
+
+    container.scrollBy({
+      left: direction === "next" ? cardWidth : -cardWidth,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <section className="w-full mx-auto px-4 sm:px-6 lg:px-8 py-3">
       <div className="mx-auto px-4 sm:px-6 lg:px-8">
         {/* header */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-6 mb-8">
+        <div className="flex flex-wrap items-center justify-between gap-4 sm:gap-6 mb-8">
           <h2 className="text-[22px] sm:text-[28px] md:text-[32px] lg:text-[36px] font-semibold text-[#232323]">
             More articles
           </h2>
-          <NavArrowButton className="hidden sm:flex" />
+          <NavArrowButton
+            onPrev={() => scrollByAmount("prev")}
+            onNext={() => scrollByAmount("next")}
+          />
         </div>
 
-        {/* Cards grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[2px] sm:gap-6">
+        {/* Cards row */}
+        <div
+          ref={scrollRef}
+          className="flex flex-nowrap overflow-x-auto scrollbar-hidden gap-4 sm:gap-6 lg:gap-5 scroll-smooth snap-x snap-mandatory"
+        >
           {articles.map((article) => (
             <a
               key={article.id}
               href="#"
-              className="bg-white rounded-[16px] overflow-hidden transition-shadow group"
+              data-card
+              className="bg-white rounded-[16px] overflow-hidden transition-shadow group shrink-0 snap-start w-[85%] xs:w-[70%] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-14px)] 2xl:w-[calc(25%-15px)]"
             >
               {/* Thumbnail */}
-              <div className="overflow-hidden h-48">
+              <div className="w-full aspect-[411/310] overflow-hidden rounded-[20px]">
                 <Image
                   src={article.image}
                   alt={article.alt}
@@ -102,11 +158,6 @@ export default function MoreArticles() {
               </div>
             </a>
           ))}
-        </div>
-
-        {/* navigate prev, next */}
-        <div className="sm:hidden mt-6">
-          <NavArrowButton />
         </div>
       </div>
     </section>

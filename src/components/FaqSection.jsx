@@ -39,9 +39,9 @@ export default function FaqSection({ faqs = pricingFaqs }) {
                 </span>
                 <div className="shrink-0">
                   {isOpen ? (
-                    <CiCircleMinus className="w-3.5 h-3.5 text-[#4F4F4F]" />
+                    <CiCircleMinus className="w-4 h-4 text-[#4F4F4F]" />
                   ) : (
-                    <CiCirclePlus className="w-3.5 h-3.5 text-[#4F4F4F]" />
+                    <CiCirclePlus className="w-4 h-4 text-[#4F4F4F]" />
                   )}
                 </div>
               </button>

@@ -57,7 +57,10 @@ const shareButtons = [
 
 export default function ArticleDetail() {
   return (
-    <section className="w-full mx-auto px-4 sm:px-6 lg:px-8 pb-8">
+    <section
+      id="articles-details"
+      className="mx-auto max-w-6xl xl:max-w-7xl px-4 sm:px-12 pb-8 scroll-mt-20"
+    >
       <div>
         {/* Yoga for beginners */}
         <h2 className="text-[18px] sm:text-[20px] font-medium text-[#232323] mb-3">
@@ -151,8 +154,7 @@ export default function ArticleDetail() {
               <button
                 key={label}
                 aria-label={label}
-                title={label}
-                className="flex items-center justify-center rounded-full border border-[#DCDCDC] p-[12px] hover:bg-[#DCDCDC] transition-all duration-300 hover:scale-110 hover:-translate-y-1"
+                className="flex items-center justify-center rounded-full border border-[#DCDCDC] p-[12px] hover:bg-[#94f029] transition-all duration-300 hover:scale-110 hover:-translate-y-1"
               >
                 <img src={icon} alt={label} className="w-[18px] h-[18px]" />
               </button>

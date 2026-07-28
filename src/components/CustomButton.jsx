@@ -57,6 +57,7 @@ export default function CustomButton({
 
   return (
     <button
+      type="button"
       onClick={onClick}
       className={twMerge(
         clsx(

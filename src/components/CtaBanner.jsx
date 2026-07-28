@@ -30,12 +30,12 @@ export default function CtaBanner() {
               text="Talk to sales"
               variant="white"
               icon={<Image src={Headphone} alt="" width={16} height={16} />}
-              className="w-full sm:w-auto justify-between sm:justify-start px-6 py-3 sm:py-1 gap-2"
+              className="w-full sm:w-auto justify-between sm:justify-start pr-2 pl-3 py-3 sm:py-1 gap-2"
             />
             <CustomButton
               text="Start Free Trial"
               variant="green"
-              className="w-full sm:w-auto justify-between sm:justify-start px-6 py-3 sm:py-1"
+              className="w-full sm:w-auto justify-between sm:justify-start px-3 py-3 sm:py-1"
             />
           </div>
         </div>

@@ -1,12 +1,43 @@
 "use client";
 
-import { LuChevronsRight } from "react-icons/lu";
+import { useState } from "react";
 import CustomButton from "./CustomButton";
 
 export default function NewsletterSection() {
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const validateEmail = (value) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(value);
+  };
+
+  const handleSubscribe = () => {
+    if (!email.trim()) {
+      setError("Please enter your email");
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      setError("Please enter a valid email");
+      return;
+    }
+
+    setError("");
+    alert("Subscribed successfully!");
+    setEmail("");
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      handleSubscribe();
+    }
+  };
+
   return (
-    <section className="bg-[#054B1F] py-12 sm:py-16 lg:py-20">
-      <div className="w-full mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="bg-[#054B1F] py-10 sm:py-16 lg:py-12">
+      <div className="mx-auto max-w-6xl xl:max-w-7xl px-4 sm:px-12">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
           {/* Content */}
           <div className="w-full lg:w-auto text-center lg:text-left">
@@ -19,20 +50,38 @@ export default function NewsletterSection() {
 
           {/* Form */}
           <div className="w-full lg:max-w-[560px]">
-            <div className="flex flex-col sm:flex-row items-center border border-white rounded-[20px] sm:rounded-full p-2 gap-2 sm:gap-0">
+            <div
+              className={`flex flex-col sm:flex-row items-center border rounded-[20px] sm:rounded-full p-2 gap-2 sm:gap-0 transition-colors ${
+                error ? "border-red-400" : "border-white"
+              }`}
+            >
               <input
                 type="email"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  if (error) setError("");
+                }}
+                onKeyDown={handleKeyDown}
                 placeholder="Enter your email"
                 className="w-full sm:flex-1 bg-transparent px-4 sm:px-5 py-3 text-white text-[15px] sm:text-base outline-none placeholder:text-white/80"
               />
 
               <CustomButton
-                text="Subscribe"
+                text={loading ? "Subscribing..." : "Subscribe"}
                 variant="green"
                 fullWidth={true}
-                className="w-full sm:w-auto pr-[6px] pl-[8px] py-[4px] text-[15px] sm:text-base whitespace-nowrap"
+                onClick={handleSubscribe}
+                disabled={loading}
+                className="w-full sm:w-auto p-[8px] text-[15px] sm:text-base whitespace-nowrap disabled:opacity-60 disabled:cursor-not-allowed"
               />
             </div>
+
+            {error && (
+              <p className="text-red-300 text-sm mt-2 text-center lg:text-left">
+                {error}
+              </p>
+            )}
           </div>
         </div>
       </div>

@@ -137,7 +137,7 @@ export default function PricingHero() {
   ];
 
   return (
-    <section className="w-full mx-auto px-4 sm:px-6 lg:px-8 sm:pt-8 sm:pb-2">
+    <section className="mx-auto max-w-6xl xl:max-w-7xl px-4 sm:px-12 sm:pt-8 sm:pb-2">
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
         {/* header & title */}
         <div>
@@ -160,24 +160,27 @@ export default function PricingHero() {
             Save 20%
           </span>
 
-          <div className="relative flex items-center bg-white border border-[#232323] rounded-full mt-6 md:mt-0 w-full md:w-auto">
+          <div className="relative flex items-center bg-white border border-[#232323] rounded-full mt-6 md:mt-0 w-full md:w-auto p-1">
             <div
-              className={`absolute top-1.5 bottom-1.5 w-[calc(50%-6px)] bg-[#18181b] border border-[#808080] rounded-full transition-all duration-300 ease-in-out ${
-                isYearly ? "left-[calc(50%+3px)]" : "left-1.5"
+              className={`absolute top-1 bottom-1 w-[calc(50%-4px)] bg-[#18181b] border border-[#808080] rounded-full transition-all duration-300 ease-in-out ${
+                isYearly ? "left-[calc(50%+2px)]" : "left-1"
               }`}
             />
 
+            {/* Monthly Button */}
             <button
               onClick={() => setIsYearly(false)}
-              className={`relative z-10 flex-1 md:flex-none px-5 py-2 rounded-full font-semibold text-[16px] transition-colors duration-300 ${
+              className={`relative z-10 flex-1 flex items-center justify-center px-6 py-2 rounded-full font-medium text-[16px] transition-colors duration-300 ${
                 !isYearly ? "text-white" : "text-[#4F4F4F]"
               }`}
             >
               Monthly
             </button>
+
+            {/* Yearly Button */}
             <button
               onClick={() => setIsYearly(true)}
-              className={`relative z-10 flex-1 md:flex-none px-5 py-2 rounded-full font-semibold text-[16px] transition-colors duration-300 ${
+              className={`relative z-10 flex-1 flex items-center justify-center px-6 py-2 rounded-full font-medium text-[16px] transition-colors duration-300 ${
                 isYearly ? "text-white" : "text-[#4F4F4F]"
               }`}
             >

@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { IoIosArrowForward } from "react-icons/io";
 import CustomButton from "./CustomButton";
 
 const slides = [
@@ -25,16 +26,18 @@ const slides = [
 export default function ArticleHero() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
-    }, 6000);
+  const handleNext = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
+  };
 
-    return () => clearInterval(timer);
-  }, []);
+  const handlePrev = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? slides.length - 1 : prevIndex - 1,
+    );
+  };
 
   return (
-    <section className="w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <section className="mx-auto max-w-6xl xl:max-w-7xl px-4 sm:px-12 py-8">
       {/* Title */}
       <div className="mb-6">
         <div className="flex items-center gap-3 mb-3">
@@ -55,14 +58,37 @@ export default function ArticleHero() {
           <CustomButton
             text="Start Reading"
             variant="outline"
+            onClick={() =>
+              document
+                .getElementById("articles-details")
+                ?.scrollIntoView({ behavior: "smooth" })
+            }
             style={{ cursor: "pointer" }}
-            className="self-start sm:self-auto flex-shrink-0 py-1.5 pl-4 sm:pl-5 pr-1.5 sm:pr-2"
+            className="self-start sm:self-auto flex-shrink-0 px-[14px] py-[10px]"
           />
         </div>
       </div>
 
       {/* Image Slider */}
       <div className="relative w-full rounded-[32px] overflow-hidden h-56 sm:h-80 lg:h-[420px] group bg-gray-100">
+        {/* Left Navigation Arrow */}
+        <button
+          onClick={handlePrev}
+          aria-label="Previous slide"
+          className="absolute left-4 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center w-10 h-10 rounded-[12px] bg-[#3B4352]/70 hover:bg-[#3B4352] transition-colors cursor-pointer"
+        >
+          <IoIosArrowForward className="rotate-180 text-white text-[20px]" />
+        </button>
+
+        {/* Right Navigation Arrow */}
+        <button
+          onClick={handleNext}
+          aria-label="Next slide"
+          className="absolute right-4 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center w-10 h-10 rounded-[12px] bg-[#3B4352]/70 hover:bg-[#3B4352] transition-colors cursor-pointer"
+        >
+          <IoIosArrowForward className="text-white text-[20px]" />
+        </button>
+
         {/* Images */}
         {slides.map((slide, index) => (
           <div

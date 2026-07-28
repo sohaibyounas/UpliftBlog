@@ -35,7 +35,7 @@ export default function AboutHero() {
   };
 
   return (
-    <section className="w-full mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+    <section className="mx-auto max-w-6xl xl:max-w-7xl px-4 sm:px-12 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
       {/* Left Content */}
       <div>
         <IconBadge text="OUR SERVICES" />
@@ -78,7 +78,16 @@ export default function AboutHero() {
         </p>
 
         {/* CTA Button */}
-        <CustomButton text="Get in Touch" variant="black" />
+        <CustomButton
+          text="Get in Touch"
+          variant="black"
+          onClick={() =>
+            document
+              .getElementById("contact-us")
+              ?.scrollIntoView({ behavior: "smooth" })
+          }
+          className="px-[16px] py-[10px] text-[15px] sm:text-base whitespace-nowrap"
+        />
       </div>
 
       {/* Right Image */}

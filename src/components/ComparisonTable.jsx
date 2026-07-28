@@ -9,10 +9,13 @@ export default function ComparisonTable() {
   const tableScrollRef = useRef(null);
 
   useEffect(() => {
+    const sectionEl = sectionRef.current;
     const scrollEl = tableScrollRef.current;
-    if (!scrollEl) return;
+    if (!sectionEl || !scrollEl) return;
 
     const onWheel = (event) => {
+      if (!sectionEl.contains(event.target)) return;
+
       const deltaY = event.deltaY;
       const atTop = scrollEl.scrollTop <= 0;
       const atBottom =
@@ -28,12 +31,12 @@ export default function ComparisonTable() {
       scrollEl.scrollTop += deltaY;
     };
 
-    scrollEl.addEventListener("wheel", onWheel, {
+    sectionEl.addEventListener("wheel", onWheel, {
       passive: false,
       capture: true,
     });
     return () =>
-      scrollEl.removeEventListener("wheel", onWheel, { capture: true });
+      sectionEl.removeEventListener("wheel", onWheel, { capture: true });
   }, []);
 
   const comparisonCategories = [
@@ -227,8 +230,9 @@ export default function ComparisonTable() {
   ];
 
   return (
-    <section className="w-full mx-auto px-4 sm:px-6 lg:px-8 pt-[12px]">
+    <section className="mx-auto max-w-6xl xl:max-w-7xl px-4 sm:px-12 pt-[12px]">
       <div ref={sectionRef} className="rounded-3xl bg-white">
+        {/* header */}
         <div className="bg-white text-center pt-[12px] pb-2">
           <div className="inline-flex items-center justify-center mb-3">
             <IconBadge alt="Resource Center" text="COMPRESSION" />

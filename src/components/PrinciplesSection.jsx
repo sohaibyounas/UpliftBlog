@@ -36,7 +36,7 @@ export default function PrinciplesSection() {
   ];
 
   return (
-    <section className="w-full mx-auto px-6 pt-15">
+    <section className="mx-auto max-w-6xl xl:max-w-7xl px-4 sm:px-12 pt-15">
       {/* header */}
       <div className="mb-14">
         <IconBadge text="WHAT WE BELIEVE" />

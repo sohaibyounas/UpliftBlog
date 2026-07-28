@@ -8,7 +8,7 @@ const Image = "/images/image-33.svg";
 
 export default function HeroSection() {
   return (
-    <section className="w-full mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <section className="mx-auto max-w-6xl xl:max-w-7xl text-white px-8 sm:px-10 md:px-12 py-10 sm:py-12 md:py-14">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 sm:gap-0 mb-9">
         <div className="flex flex-col gap-2 sm:gap-3">
           <IconBadge
@@ -30,6 +30,7 @@ export default function HeroSection() {
                 .getElementById("latest-articles")
                 ?.scrollIntoView({ behavior: "smooth" })
             }
+            className="w-full px-[14px] py-[10px] text-[15px] sm:text-base whitespace-nowrap"
           />
         </div>
       </div>

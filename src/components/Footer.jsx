@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { IoChevronDown } from "react-icons/io5";
 
@@ -11,6 +12,7 @@ const Linkedin = "/images/Linkedin.svg";
 const PlayReel = "/images/PlayReel.svg";
 const FooterImage = "/images/FooterImage.svg";
 const PlayButton = "/images/PlayButton.svg";
+const UplifttLogo = "/images/upliftt_logo.svg";
 
 const footerLinks = {
   Product: [
@@ -49,7 +51,7 @@ export default function Footer() {
     <footer className="bg-[#054B1F] mt-14">
       <div className="w-full mx-auto px-6 lg:px-8 pt-12">
         {/* Top */}
-        <div className="grid grid-cols-1 lg:grid-cols-[302px_1fr] gap-[50px] md:gap-[140px]">
+        <div className="grid grid-cols-1 lg:grid-cols-[302px_1fr] gap-[50px] md:gap-0 lg:gap-60">
           {/* Left */}
           <div>
             <img
@@ -65,7 +67,7 @@ export default function Footer() {
           </div>
 
           {/* Right */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-x-3 sm:gap-x-6 md:gap-12 lg:gap-4">
             {Object.entries(footerLinks).map(([title, links]) => (
               <div key={title}>
                 <h3 className="text-[#8EFF0A] text-[14px] font-semibold mb-6">
@@ -187,12 +189,24 @@ export default function Footer() {
       </div>
 
       {/* Bottom Banner */}
-      <div>
-        <img
+      <div className="relative w-full h-[150px]">
+        <Image
           src={FooterImage}
           alt="Footer Banner"
-          className="w-full object-cover"
+          width={1440}
+          height={150}
+          className="w-full h-full object-cover"
         />
+
+        <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+          <Image
+            src={UplifttLogo}
+            alt="Upliftt Logo"
+            width={529}
+            height={117.9}
+            className="w-[350px] sm:w-[529px] h-[117.9px] object-contain"
+          />
+        </div>
       </div>
     </footer>
   );

@@ -11,9 +11,9 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className="scrollbar-hidden">
       <body
-        className="font-sans min-h-screen flex flex-col"
+        className="font-sans min-h-screen flex flex-col scrollbar-hidden"
         suppressHydrationWarning
       >
         <Navbar />
