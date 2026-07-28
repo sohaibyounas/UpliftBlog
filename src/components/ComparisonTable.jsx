@@ -1,43 +1,13 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useState } from "react";
 import IconBadge from "./IconBadge";
 import { IoIosCheckmarkCircleOutline } from "react-icons/io";
 
+const NAVBAR_OFFSET_PX = 80;
+
 export default function ComparisonTable() {
-  const sectionRef = useRef(null);
-  const tableScrollRef = useRef(null);
-
-  useEffect(() => {
-    const sectionEl = sectionRef.current;
-    const scrollEl = tableScrollRef.current;
-    if (!sectionEl || !scrollEl) return;
-
-    const onWheel = (event) => {
-      if (!sectionEl.contains(event.target)) return;
-
-      const deltaY = event.deltaY;
-      const atTop = scrollEl.scrollTop <= 0;
-      const atBottom =
-        scrollEl.scrollTop + scrollEl.clientHeight >= scrollEl.scrollHeight;
-
-      if ((deltaY < 0 && atTop) || (deltaY > 0 && atBottom)) {
-        return;
-      }
-
-      event.preventDefault();
-      event.stopPropagation();
-
-      scrollEl.scrollTop += deltaY;
-    };
-
-    sectionEl.addEventListener("wheel", onWheel, {
-      passive: false,
-      capture: true,
-    });
-    return () =>
-      sectionEl.removeEventListener("wheel", onWheel, { capture: true });
-  }, []);
+  const [selectedPlan, setSelectedPlan] = useState("trial");
 
   const comparisonCategories = [
     {
@@ -229,10 +199,16 @@ export default function ComparisonTable() {
     },
   ];
 
+  const plans = [
+    { key: "trial", label: "Free trail" },
+    { key: "starter", label: "Starter" },
+    { key: "scale", label: "Scale" },
+    { key: "pro", label: "Pro" },
+  ];
+
   return (
-    <section className="mx-auto max-w-6xl xl:max-w-7xl px-4 sm:px-12 pt-[12px]">
-      <div ref={sectionRef} className="rounded-3xl bg-white">
-        {/* header */}
+    <section className="mx-auto max-w-6xl xl:max-w-7xl px-4 sm:px-12 w-full py-10">
+      <div className="rounded-3xl bg-white">
         <div className="bg-white text-center pt-[12px] pb-2">
           <div className="inline-flex items-center justify-center mb-3">
             <IconBadge alt="Resource Center" text="COMPRESSION" />
@@ -242,46 +218,35 @@ export default function ComparisonTable() {
           </h2>
         </div>
 
-        <div
-          ref={tableScrollRef}
-          className="max-h-[520px] overflow-y-auto overflow-x-auto scrollbar-hidden"
-        >
+        {/* Desktop table */}
+        <div className="hidden md:block">
           <table className="w-full text-left border-collapse min-w-[750px]">
-            <thead className="sticky top-0 z-20 bg-white">
+            <thead
+              className="sticky z-20 bg-white"
+              style={{ top: NAVBAR_OFFSET_PX }}
+            >
               <tr>
                 <th className="p-4 w-2/6"></th>
-                <th className="p-4 text-center w-1/6">
-                  <span className="block text-[20px] sm:text-[22px] font-semibold text-[#232323] mb-3">
-                    Free trail
-                  </span>
-                  <button className="w-full h-[38px] px-4 rounded-full bg-[#95EA00] text-[#232323] font-semibold text-[9px] sm:text-[16px] border-2 border-[#74D800] transition-colors hover:bg-[#85d400] flex items-center justify-center box-border">
-                    Choose Plan
-                  </button>
-                </th>
-                <th className="p-4 text-center w-1/6">
-                  <span className="block text-[20px] sm:text-[22px] font-semibold text-[#232323] mb-3">
-                    Starter
-                  </span>
-                  <button className="w-full h-[38px] px-4 rounded-full bg-gray-50/50 border border-[#CBCBCB] text-[#4F4F4F] font-medium text-[9px] sm:text-[16px] hover:bg-gray-100 transition-colors flex items-center justify-center box-border">
-                    Choose plan
-                  </button>
-                </th>
-                <th className="p-4 text-center w-1/6">
-                  <span className="block text-[20px] sm:text-[22px] font-semibold text-[#232323] mb-3">
-                    Scale
-                  </span>
-                  <button className="w-full h-[38px] px-4 rounded-full bg-gray-50/50 border border-[#CBCBCB] text-[#4F4F4F] font-medium text-[9px] sm:text-[16px] hover:bg-gray-100 transition-colors flex items-center justify-center box-border">
-                    Choose plan
-                  </button>
-                </th>
-                <th className="p-4 text-center w-1/6">
-                  <span className="block text-[20px] sm:text-[22px] font-semibold text-[#232323] mb-3">
-                    Pro
-                  </span>
-                  <button className="w-full h-[38px] px-4 rounded-full bg-gray-50/50 border border-[#CBCBCB] text-[#4F4F4F] font-medium text-[9px] sm:text-[16px] hover:bg-gray-100 transition-colors flex items-center justify-center box-border">
-                    Choose plan
-                  </button>
-                </th>
+                {plans.map((plan) => {
+                  const isSelected = selectedPlan === plan.key;
+                  return (
+                    <th key={plan.key} className="p-4 text-center w-1/6">
+                      <span className="block text-[20px] sm:text-[22px] font-semibold text-[#232323] mb-3">
+                        {plan.label}
+                      </span>
+                      <button
+                        onClick={() => setSelectedPlan(plan.key)}
+                        className={`w-full h-[38px] px-4 rounded-full font-semibold text-[9px] lg:text-[16px] transition-colors flex items-center justify-center box-border ${
+                          isSelected
+                            ? "bg-[#95EA00] text-[#232323] border-2 border-[#74D800] hover:bg-[#85d400]"
+                            : "bg-gray-50/50 border border-[#CBCBCB] text-[#4F4F4F] font-medium hover:bg-gray-100"
+                        }`}
+                      >
+                        Choose Plan
+                      </button>
+                    </th>
+                  );
+                })}
               </tr>
             </thead>
 
@@ -304,43 +269,108 @@ export default function ComparisonTable() {
                       <td className="py-3.5 px-6 text-[13px] sm:text-[18px] font-medium text-[#404040]">
                         {feature.name}
                       </td>
-                      {["trial", "starter", "scale", "pro"].map(
-                        (planKey, pIdx) => {
-                          const val = feature[planKey];
-                          return (
-                            <td
-                              key={pIdx}
-                              className="py-3.5 px-4 text-center text-xs font-medium"
-                            >
-                              {typeof val === "boolean" ? (
-                                val ? (
-                                  <div className="inline-flex items-center justify-center">
-                                    <IoIosCheckmarkCircleOutline className="text-[#63B800] text-base" />
-                                  </div>
-                                ) : (
-                                  <span className="text-[#404040] text-[20px] font-medium">
-                                    —
-                                  </span>
-                                )
-                              ) : feature.badge && val ? (
-                                <span className="inline-block px-3 py-0.5 text-[12px] font-medium text-[#529900] bg-[#86DF1F21] rounded-full">
-                                  {val}
-                                </span>
+                      {plans.map((plan, pIdx) => {
+                        const val = feature[plan.key];
+                        return (
+                          <td
+                            key={pIdx}
+                            className="py-3.5 px-4 text-center text-xs font-medium"
+                          >
+                            {typeof val === "boolean" ? (
+                              val ? (
+                                <div className="inline-flex items-center justify-center">
+                                  <IoIosCheckmarkCircleOutline className="text-[#63B800] text-base" />
+                                </div>
                               ) : (
-                                <span className="font-medium text-[#417900] text-[20px]">
-                                  {val}
+                                <span className="text-[#404040] text-[20px] font-medium">
+                                  —
                                 </span>
-                              )}
-                            </td>
-                          );
-                        },
-                      )}
+                              )
+                            ) : feature.badge && val ? (
+                              <span className="inline-block px-3 py-0.5 text-[12px] font-medium text-[#529900] bg-[#86DF1F21] rounded-full">
+                                {val}
+                              </span>
+                            ) : (
+                              <span className="font-medium text-[#417900] text-[20px]">
+                                {val}
+                              </span>
+                            )}
+                          </td>
+                        );
+                      })}
                     </tr>
                   ))}
                 </React.Fragment>
               ))}
             </tbody>
           </table>
+        </div>
+
+        {/* Mobile view */}
+        <div className="md:hidden px-4 pb-6">
+          <div
+            className="sticky z-20 bg-white pt-2 pb-3"
+            style={{ top: NAVBAR_OFFSET_PX }}
+          >
+            <div className="flex flex-wrap justify-center gap-2">
+              {plans.map((plan) => {
+                const isSelected = selectedPlan === plan.key;
+                return (
+                  <button
+                    key={plan.key}
+                    onClick={() => setSelectedPlan(plan.key)}
+                    className={`w-[110px] shrink-0 h-[40px] px-1 rounded-full font-semibold text-[11px] whitespace-nowrap transition-colors flex items-center justify-center box-border text-center ${
+                      isSelected
+                        ? "bg-[#95EA00] text-[#232323] border-2 border-[#74D800]"
+                        : "bg-gray-50/50 border border-[#CBCBCB] text-[#4F4F4F] font-medium"
+                    }`}
+                  >
+                    {plan.label}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {comparisonCategories.map((category, catIdx) => (
+            <div key={catIdx}>
+              <div className="bg-[#FAFAFA] border-b border-[#EEEEEE] py-2.5 px-2 text-[14px] font-medium text-[#404040] tracking-wide">
+                {category.title}
+              </div>
+              {category.features.map((feature, featIdx) => {
+                const val = feature[selectedPlan];
+                return (
+                  <div
+                    key={featIdx}
+                    className="flex items-center justify-between gap-3 border-b border-[#EEEEEE] py-3 px-2"
+                  >
+                    <span className="text-[13px] font-medium text-[#404040]">
+                      {feature.name}
+                    </span>
+                    <span className="shrink-0 text-xs font-medium">
+                      {typeof val === "boolean" ? (
+                        val ? (
+                          <IoIosCheckmarkCircleOutline className="text-[#63B800] text-xl" />
+                        ) : (
+                          <span className="text-[#404040] text-[18px] font-medium">
+                            —
+                          </span>
+                        )
+                      ) : feature.badge && val ? (
+                        <span className="inline-block px-3 py-0.5 text-[12px] font-medium text-[#529900] bg-[#86DF1F21] rounded-full">
+                          {val}
+                        </span>
+                      ) : (
+                        <span className="font-medium text-[#417900] text-[16px]">
+                          {val}
+                        </span>
+                      )}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          ))}
         </div>
       </div>
     </section>

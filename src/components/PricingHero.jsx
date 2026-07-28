@@ -3,138 +3,143 @@
 import React, { useState } from "react";
 import { LuChevronsRight } from "react-icons/lu";
 import IconBadge from "./IconBadge";
-import { IoIosCheckmarkCircleOutline } from "react-icons/io";
+import { IoIosCheckmarkCircleOutline, IoIosArrowDown } from "react-icons/io";
+import CustomButton from "./CustomButton";
 
 export default function PricingHero() {
   const [isYearly, setIsYearly] = useState(false);
   const [selectedPlanIndex, setSelectedPlanIndex] = useState(0);
+  const [expandedPlans, setExpandedPlans] = useState({}); // { [planIdx]: boolean }
 
   const plans = [
+    // trail
     {
       name: "Trial",
-      subtitle:
+      description:
         "Try everything free. Full access for 14 days, no limits, no commitments.",
       price: isYearly ? "$0" : "$0",
       period: isYearly ? "/year" : "/month",
-      buttonText: "Start with free Trail",
       badge: "14-day free trial",
+      buttonText: "Start with free Trail",
       info: "No credit card needed",
       clientCapValue: "20",
       features: [
-        "Workout builder + exercise library",
-        "Program templates",
-        "Meal plans + food scanner",
-        "Client check-ins + task system",
+        "Unlimited coaches",
+        "Unlimited clients",
+        "All Pro features",
+        "Reminder before it ends",
+        "Advanced analytics + reportings",
         "Progress + body metric tracking",
-        "Client payments",
-        "Analytics dashboard",
-        "Community feed + challenges",
-        "Contests + leaderboards",
-        "Group messaging",
-        "Courses marketplace",
-        "Automated check-in reminders",
-        "Client cap",
-        "Team member access",
-        "Advanced automations",
-        "Team member access",
-        "Advanced analytics + reporting",
         "Dedicated support",
+        "No credit card required",
       ],
     },
+
+    // starter
     {
+      id: "starter",
       name: "Starter",
-      subtitle:
-        "For coaches building their online business and taking their first clients fully digital.",
-      price: isYearly ? "$23" : "$29",
-      period: isYearly ? "/year" : "/month",
-      buttonText: "Start with Starter",
-      badge: "Popular Choice",
+      popularBadge: null,
       info: "Up to 20 clients",
-      clientCapValue: "20",
+      description:
+        "For coaches building their online business and taking their first clients fully digital.",
+      price: isYearly ? "$29" : "$39",
+      period: isYearly ? "/year" : "/month",
+      badge: "Start with starter",
+      buttonText: "Start with starter",
+      clientCap: "20",
       features: [
         "Workout builder + exercise library",
         "Program templates",
         "Meal plans + food scanner",
         "Client check-ins + task system",
         "Progress + body metric tracking",
-        "Client payments",
         "Analytics dashboard",
-        "Community feed + challenges",
-        "Contests + leaderboards",
-        "Group messaging",
-        "Courses marketplace",
-        "Automated check-in reminders",
         "Client cap",
-        "Team member access",
-        "Advanced automations",
-        "Team member access",
-        "Advanced analytics + reporting",
-        "Dedicated support",
+      ],
+      extraFeatures: [
+        "In-app messaging",
+        "Client payments",
+        "Automated check-in reminders",
       ],
     },
+
+    // scale
     {
+      id: "scale",
       name: "Scale",
-      subtitle:
+      popularBadge: "Most popular",
+      info: "Up to 50 clients",
+      description:
         "For coaches building their online business and taking their first clients fully digital.",
       price: isYearly ? "$39" : "$49",
       period: isYearly ? "/year" : "/month",
-      buttonText: "Start with Scale",
-      badge: "Best Value",
-      info: "Up to 50 clients",
-      clientCapValue: "50",
+      badge: "Start with scale",
+      buttonText: "Start with scale",
+      clientCap: "50",
       features: [
         "Workout builder + exercise library",
         "Program templates",
         "Meal plans + food scanner",
         "Client check-ins + task system",
         "Progress + body metric tracking",
-        "Client payments",
         "Analytics dashboard",
+        "Client cap",
+      ],
+      extraFeatures: [
         "Community feed + challenges",
         "Contests + leaderboards",
         "Group messaging",
         "Courses marketplace",
         "Automated check-in reminders",
-        "Client cap",
-        "Team member access",
-        "Advanced automations",
-        "Team member access",
-        "Advanced analytics + reporting",
-        "Dedicated support",
       ],
     },
+
+    // pro
     {
+      id: "pro",
       name: "Pro",
-      subtitle:
-        "For coaches building their online business and taking their first clients fully digital.",
-      price: isYearly ? "$63" : "$79",
-      period: isYearly ? "/year" : "/month",
-      buttonText: "Start with Pro",
-      badge: "Enterprise",
+      popularBadge: null,
       info: "Unlimited",
-      clientCapValue: "Unlimited",
+      description:
+        "For coaches building their online business and taking their first clients fully digital.",
+      price: isYearly ? "$69" : "$79",
+      period: isYearly ? "/year" : "/month",
+      badge: "Choose pro plan",
+      buttonText: "Start with pro",
+      clientCap: "Unlimited",
       features: [
         "Workout builder + exercise library",
         "Program templates",
         "Meal plans + food scanner",
-        "Client check-ins + task system",
-        "Progress + body metric tracking",
-        "Client payments",
-        "Analytics dashboard",
+        "Team member access",
+        "Advanced automations",
+        "Advanced analytics + reporting",
+        "Client cap",
+      ],
+      extraFeatures: [
         "Community feed + challenges",
         "Contests + leaderboards",
         "Group messaging",
         "Courses marketplace",
         "Automated check-in reminders",
-        "Client cap",
-        "Team member access",
-        "Advanced automations",
-        "Team member access",
-        "Advanced analytics + reporting",
-        "Dedicated support",
+        "Priority support",
       ],
     },
   ];
+
+  const getDisplayPrice = (plan) => {
+    if (typeof plan.price === "string") {
+      return { amount: plan.price, period: plan.period };
+    }
+    const amount = isYearly ? plan.price.yearly : plan.price.monthly;
+    return { amount: `$${amount}`, period: isYearly ? "/year" : "/month" };
+  };
+
+  const toggleExpand = (e, planIdx) => {
+    e.stopPropagation();
+    setExpandedPlans((prev) => ({ ...prev, [planIdx]: !prev[planIdx] }));
+  };
 
   return (
     <section className="mx-auto max-w-6xl xl:max-w-7xl px-4 sm:px-12 sm:pt-8 sm:pb-2">
@@ -191,26 +196,41 @@ export default function PricingHero() {
       </div>
 
       {/* packages */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-2 sm:mb-10 pt-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 items-start">
         {plans.map((plan, planIdx) => {
           const isSelected = selectedPlanIndex === planIdx;
+          const isExpanded = !!expandedPlans[planIdx];
+          const hasExtra = plan.extraFeatures && plan.extraFeatures.length > 0;
+
+          const visibleFeatures =
+            isExpanded && hasExtra
+              ? [...plan.features, ...plan.extraFeatures]
+              : plan.features;
+
           const clientCapIdx = plan.features.findIndex(
             (f) => f.toLowerCase() === "client cap",
           );
+
+          const isTrial = planIdx === 0;
+
+          const clientCapDisplayValue = plan.clientCapValue || plan.clientCap;
+
+          const { amount: displayPrice, period: displayPeriod } =
+            getDisplayPrice(plan);
 
           return (
             <div
               key={planIdx}
               onClick={() => setSelectedPlanIndex(planIdx)}
-              className={`relative rounded-[24px] p-6 sm:p-[20px] flex flex-col justify-between cursor-pointer transition-all duration-300 ease-in-out transform ${
+              className={`relative rounded-[24px] p-6 sm:p-[20px] flex flex-col justify-between cursor-pointer transition-all duration-300 ease-in-out ${
                 isSelected
                   ? "border-2 border-[#63B800] bg-white"
-                  : "border border-[#EEEEEE] bg-white hover:border-gray-300"
+                  : "border-2 border-[#EEEEEE] bg-white"
               }`}
             >
-              {isSelected && (
-                <div className="absolute -top-4.5 left-1/2 -translate-x-1/2 bg-[#95EA00] text-black text-[14px] font-semibold px-3 py-1 rounded-full border-2 border-[#74D800] transition-all duration-300 z-20 whitespace-nowrap">
-                  {plan.buttonText}
+              {isSelected && plan.badge && (
+                <div className="absolute -top-4.5 left-1/2 -translate-x-1/2 bg-[#95EA00] text-white text-[14px] font-semibold px-3 py-1 rounded-full border-2 border-[#74D800] z-20 whitespace-nowrap truncate">
+                  {plan.badge}
                 </div>
               )}
               <div>
@@ -224,53 +244,42 @@ export default function PricingHero() {
                     </span>
                   </div>
                   <p className="text-[12px] font-medium text-[#4F4F4F] mt-1 min-h-[32px]">
-                    {plan.subtitle}
+                    {plan.description}
                   </p>
                   <div className="flex items-center">
                     <span className="text-[34px] sm:text-[40px] font-semibold tracking-tight text-[#232323] transition-all duration-300">
-                      {plan.price}
+                      {displayPrice}
                     </span>
                     <span className="text-[16px] font-medium text-[#4F4F4F] ml-1">
-                      {plan.period}
+                      {displayPeriod}
                     </span>
                   </div>
                 </div>
 
-                <button
+                <CustomButton
+                  type="submit"
+                  text={plan.buttonText}
+                  fullWidth
+                  variant={isSelected ? "green" : "outline"}
+                  className="py-[4px] pr-[6px] pl-[12px] mb-8"
                   onClick={(e) => {
                     e.stopPropagation();
                     setSelectedPlanIndex(planIdx);
                   }}
-                  className={`w-full py-[6px] pr-[6px] pl-[12px] rounded-full text-[14px] font-medium transition-all duration-300 mb-8 flex items-center justify-between gap-2 ${
-                    isSelected
-                      ? "bg-black text-white border-2 border-[#8F8F8F]"
-                      : "bg-transparent text-[#232323] border border-[#EEEEEE]"
-                  }`}
-                >
-                  <span>{plan.buttonText}</span>
-                  <span
-                    className={`w-[31px] h-[31px] rounded-full flex items-center justify-center shrink-0 transition-colors duration-300 ${
-                      isSelected ? "bg-[#93FF16]" : "bg-transparent"
-                    }`}
-                  >
-                    <LuChevronsRight
-                      className={isSelected ? "text-black" : "text-[#232323]"}
-                    />
-                  </span>
-                </button>
+                />
 
                 <div className="border-t border-[#EEEEEE] pt-6">
                   <p className="text-[16px] font-semibold text-[#232323] tracking-wider mb-4">
                     Features
                   </p>
                   <ul className="space-y-3">
-                    {plan.features.map((feature, idx) => {
+                    {visibleFeatures.map((feature, idx) => {
                       const isClientCap =
                         feature.toLowerCase() === "client cap";
                       const isAfterClientCap =
                         clientCapIdx !== -1 && idx > clientCapIdx;
 
-                      const isDisabled = planIdx < 3 && isAfterClientCap;
+                      const isDisabled = isTrial && isAfterClientCap;
 
                       return (
                         <li
@@ -296,13 +305,29 @@ export default function PricingHero() {
 
                           {isClientCap && (
                             <span className="text-[14px] font-semibold text-[#232323] shrink-0">
-                              {plan.clientCapValue}
+                              {clientCapDisplayValue}
                             </span>
                           )}
                         </li>
                       );
                     })}
                   </ul>
+
+                  {hasExtra && (
+                    <button
+                      onClick={(e) => toggleExpand(e, planIdx)}
+                      className="mt-4 flex items-center gap-1.5 text-[13px] font-semibold text-[#232323] hover:text-[#63B800] transition-colors duration-200"
+                    >
+                      <span className="hover:underline cursor-pointer">
+                        {isExpanded ? "See less" : "See more"}
+                      </span>
+                      <IoIosArrowDown
+                        className={`text-base transition-transform duration-300 ${
+                          isExpanded ? "rotate-180" : ""
+                        }`}
+                      />
+                    </button>
+                  )}
                 </div>
               </div>
             </div>

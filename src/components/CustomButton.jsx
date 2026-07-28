@@ -30,8 +30,7 @@ export default function CustomButton({
   const iconVariants = {
     dark: "bg-[#95EA00] text-black w-8 h-8",
     primary: "bg-[#18181b] text-white w-8 h-8",
-    outline:
-      "bg-[#232323] text-white w-[20px] h-[20px] sm:w-[30px] sm:h-[30px]",
+    outline: "bg-[#232323] text-white w-8 h-8",
     green: "bg-[#191919] text-white w-8 h-8",
     white: "bg-transparent w-8 h-8",
     black: "bg-[#93FF16] text-black w-8 h-8",
@@ -49,7 +48,7 @@ export default function CustomButton({
   const iconSizeVariants = {
     dark: "w-4 h-4",
     primary: "w-4 h-4",
-    outline: "text-[16px] sm:text-[24px] text-white",
+    outline: "w-4 h-4 text-white",
     green: "w-4 h-4",
     white: "w-4 h-4",
     black: "w-4 h-4",
