@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { LuChevronsRight } from "react-icons/lu";
 import IconBadge from "./IconBadge";
 import { IoIosCheckmarkCircleOutline, IoIosArrowDown } from "react-icons/io";
 import CustomButton from "./CustomButton";
@@ -9,7 +8,7 @@ import CustomButton from "./CustomButton";
 export default function PricingHero() {
   const [isYearly, setIsYearly] = useState(false);
   const [selectedPlanIndex, setSelectedPlanIndex] = useState(0);
-  const [expandedPlans, setExpandedPlans] = useState({}); // { [planIdx]: boolean }
+  const [expandedPlans, setExpandedPlans] = useState({});
 
   const plans = [
     // trail
@@ -161,29 +160,28 @@ export default function PricingHero() {
 
         {/* tabs monthly / yearly */}
         <div className="relative flex flex-col items-end md:flex-row md:items-center gap-2 md:gap-4 self-start md:self-center w-full md:w-auto">
-          <span className="text-[13px] sm:text-[20px] font-medium text-[#18181b] bg-[#95EA00]/20 text-[#426a00] px-3 py-1.5 rounded-full border border-[#95EA00]/40 shrink-0 absolute -top-3 right-0 md:static md:top-auto md:right-auto">
+          <span className="group relative inline-flex items-center gap-1.5 text-[12px] sm:text-[14px] font-semibold text-[#365314] bg-gradient-to-r from-[#bef264] to-[#95EA00] px-3.5 py-1.5 rounded-full shadow-sm shadow-[#95EA00]/20 border border-white/40 shrink-0 transition-transform duration-300 hover:scale-105">
+            <span className="flex h-1.5 w-1.5 rounded-full bg-[#365314] animate-pulse"></span>
             Save 20%
-          </span>
+        </span>
 
-          <div className="relative flex items-center bg-white border border-[#232323] rounded-full mt-6 md:mt-0 w-full md:w-auto p-1">
+          <div className="relative flex items-center bg-[#f4f4f5] border border-[#e4e4e7] shadow-inner rounded-full w-full md:w-auto p-1.5">
             <div
-              className={`absolute top-1 bottom-1 w-[calc(50%-4px)] bg-[#18181b] border border-[#808080] rounded-full transition-all duration-300 ease-in-out ${isYearly ? "left-[calc(50%+2px)]" : "left-1"
+              className={`absolute top-1.5 bottom-1.5 w-[calc(50%-6px)] bg-[#18181b] shadow-md rounded-full transition-all duration-300 ease-out ${isYearly ? "left-[calc(50%+3px)]" : "left-1.5"
                 }`}
             />
 
-            {/* Monthly Button */}
             <button
               onClick={() => setIsYearly(false)}
-              className={`relative z-10 flex-1 flex items-center justify-center px-6 py-2 rounded-full font-medium text-[16px] transition-colors duration-300 ${!isYearly ? "text-white" : "text-[#4F4F4F]"
+              className={`relative z-10 flex-1 flex items-center justify-center px-6 py-2 rounded-full font-medium text-[15px] transition-colors duration-200 ${!isYearly ? "text-white" : "text-[#71717a] hover:text-[#18181b]"
                 }`}
             >
               Monthly
             </button>
 
-            {/* Yearly Button */}
             <button
               onClick={() => setIsYearly(true)}
-              className={`relative z-10 flex-1 flex items-center justify-center px-6 py-2 rounded-full font-medium text-[16px] transition-colors duration-300 ${isYearly ? "text-white" : "text-[#4F4F4F]"
+              className={`relative z-10 flex-1 flex items-center justify-center px-6 py-2 rounded-full font-medium text-[15px] transition-colors duration-200 ${isYearly ? "text-white" : "text-[#71717a] hover:text-[#18181b]"
                 }`}
             >
               Yearly

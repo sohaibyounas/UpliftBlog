@@ -1,8 +1,8 @@
 "use client";
 
-import { useRef } from "react";
-import Image from "next/image";
+import { useRef, useState, useEffect } from "react";
 import { IoIosArrowForward } from "react-icons/io";
+import Image from "next/image";
 
 const Card1 = "/images/Card1.svg";
 const Card2 = "/images/Card2.svg";
@@ -71,24 +71,35 @@ const articles = [
   },
 ];
 
-function NavArrowButton({ className = "", onPrev, onNext }) {
+function NavArrowButton({ className = "", onPrev, onNext, isAtStart, isAtEnd }) {
   return (
     <div
-      className={`flex items-center gap-2 border-2 border-[#DCDCDC] rounded-full py-[6px] sm:py-[9px] px-[6px] sm:px-[8px] hover:bg-gray-50 transition ${className}`}
+      className={`inline-flex items-center gap-2 p-[6px] bg-white transition-all duration-300 ${className}`}
     >
+      {/* Prev Button */}
       <button
         onClick={onPrev}
+        disabled={isAtStart}
         aria-label="Previous"
-        className="flex items-center justify-center w-[20px] sm:w-[30px] h-[20px] sm:h-[30px] rounded-full bg-[#232323]"
+        className={`flex items-center justify-center w-7.5 h-7.5 rounded-full border border-[#D1D5DC] transition-all duration-300 ${isAtStart
+          ? "bg-transparent text-gray-300 cursor-not-allowed"
+          : "hover:bg-gray-200 bg-[#F3F4F6] text-[#364153]"
+          }`}
       >
-        <IoIosArrowForward className="rotate-180 text-white text-[14px] sm:text-[18px]" />
+        <IoIosArrowForward className="rotate-180 text-[16px]" />
       </button>
+
+      {/* Next Button */}
       <button
         onClick={onNext}
+        disabled={isAtEnd}
         aria-label="Next"
-        className="flex items-center justify-center w-[20px] sm:w-[30px] h-[20px] sm:h-[30px] rounded-full bg-[#232323]"
+        className={`flex items-center justify-center w-7.5 h-7.5 rounded-full border border-[#D1D5DC] transition-all duration-300 ${isAtEnd
+          ? "cursor-not-allowed bg-transparent text-gray-300"
+          : "cursor-pointer hover:bg-gray-200 bg-[#F3F4F6] text-[#364153]"
+          }`}
       >
-        <IoIosArrowForward className="text-white text-[14px] sm:text-[18px]" />
+        <IoIosArrowForward className="text-[16px]" />
       </button>
     </div>
   );
@@ -96,6 +107,31 @@ function NavArrowButton({ className = "", onPrev, onNext }) {
 
 export default function MoreArticles() {
   const scrollRef = useRef(null);
+  const [isAtStart, setIsAtStart] = useState(true);
+  const [isAtEnd, setIsAtEnd] = useState(false);
+
+  const checkScrollPosition = () => {
+    const container = scrollRef.current;
+    if (!container) return;
+
+    const { scrollLeft, scrollWidth, clientWidth } = container;
+    setIsAtStart(scrollLeft <= 5);
+    setIsAtEnd(scrollLeft + clientWidth >= scrollWidth - 5);
+  };
+
+  useEffect(() => {
+    const container = scrollRef.current;
+    if (!container) return;
+
+    checkScrollPosition();
+    container.addEventListener("scroll", checkScrollPosition);
+    window.addEventListener("resize", checkScrollPosition);
+
+    return () => {
+      container.removeEventListener("scroll", checkScrollPosition);
+      window.removeEventListener("resize", checkScrollPosition);
+    };
+  }, []);
 
   const scrollByAmount = (direction) => {
     const container = scrollRef.current;
@@ -121,6 +157,8 @@ export default function MoreArticles() {
           <NavArrowButton
             onPrev={() => scrollByAmount("prev")}
             onNext={() => scrollByAmount("next")}
+            isAtStart={isAtStart}
+            isAtEnd={isAtEnd}
           />
         </div>
 

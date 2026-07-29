@@ -12,7 +12,7 @@ const Logo = "/images/upliftlogo.svg";
 const navLinks = [
   { label: "Features", href: "#", showPlus: true },
   { label: "Pricing", href: "/pricing", showPlus: false },
-  { label: "Resource", href: "#", showPlus: true },
+  { label: "Resource", href: "/", showPlus: true },
   { label: "About Company", href: "about-company", showPlus: true },
 ];
 
@@ -85,11 +85,10 @@ export default function Navbar() {
 
       {/* Mobile Dropdown Menu */}
       <div
-        className={`lg:hidden grid transition-all duration-300 ease-in-out ${
-          isOpen
+        className={`lg:hidden grid transition-all duration-300 ease-in-out ${isOpen
             ? "grid-rows-[1fr] opacity-100 border-t border-gray-100"
             : "grid-rows-[0fr] opacity-0 border-t-0"
-        }`}
+          }`}
       >
         <div className="overflow-hidden">
           <div className="px-5 py-4 space-y-1">
