@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { IoChevronDown } from "react-icons/io5";
 
@@ -16,15 +17,32 @@ const UplifttLogo = "/images/upliftt_logo.svg";
 
 const footerLinks = {
   Product: [
-    "Training",
-    "Forms & Check-Ins",
-    "Habits",
-    "All Features",
-    "Pricing",
+    { label: "Training", href: "#" },
+    { label: "Forms & Check-Ins", href: "#" },
+    { label: "Habits", href: "#" },
+    { label: "All Features", href: "#" },
+    { label: "Pricing", href: "/pricing" },
   ],
-  Resources: ["Blog", "Help Center", "Watch a Demo", "Find a Coach"],
-  Company: ["About", "Team", "Careers", "Contact", "Partners"],
-  Legal: ["Terms", "Privacy", "Cookies", "DPA", "Security"],
+  Resources: [
+    { label: "Blog", href: "/" },
+    { label: "Help Center", href: "#" },
+    { label: "Watch a Demo", href: "#" },
+    { label: "Find a Coach", href: "#" },
+  ],
+  Company: [
+    { label: "About", href: "/about-company" },
+    { label: "Team", href: "#" },
+    { label: "Careers", href: "#" },
+    { label: "Contact", href: "#" },
+    { label: "Partners", href: "#" },
+  ],
+  Legal: [
+    { label: "Terms", href: "#" },
+    { label: "Privacy", href: "#" },
+    { label: "Cookies", href: "#" },
+    { label: "DPA", href: "#" },
+    { label: "Security", href: "#" },
+  ],
 };
 
 export default function Footer() {
@@ -76,13 +94,13 @@ export default function Footer() {
 
                 <ul className="space-y-4">
                   {links.map((link) => (
-                    <li key={link}>
-                      <a
-                        href="#"
+                    <li key={link.label}>
+                      <Link
+                        href={link.href}
                         className="text-white hover:text-white/80 text-[16px] transition underline-offset-4 hover:underline cursor-pointer"
                       >
-                        {link}
-                      </a>
+                        {link.label}
+                      </Link>
                     </li>
                   ))}
                 </ul>
@@ -138,9 +156,8 @@ export default function Footer() {
                   {language}
 
                   <IoChevronDown
-                    className={`transition-transform duration-300 ${
-                      open ? "rotate-180" : ""
-                    }`}
+                    className={`transition-transform duration-300 ${open ? "rotate-180" : ""
+                      }`}
                   />
                 </button>
 
@@ -154,11 +171,10 @@ export default function Footer() {
                           setLanguage(lang);
                           setOpen(false);
                         }}
-                        className={`w-full px-5 py-3 text-left text-[#232323] hover:bg-[#85d42a] transition-colors ${
-                          language === lang
-                            ? "bg-white font-normal"
-                            : "hover:bg-[#85d42a]"
-                        }`}
+                        className={`w-full px-5 py-3 text-left text-[#232323] hover:bg-[#85d42a] transition-colors ${language === lang
+                          ? "bg-white font-normal"
+                          : "hover:bg-[#85d42a]"
+                          }`}
                       >
                         {lang}
                       </button>

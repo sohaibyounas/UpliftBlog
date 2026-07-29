@@ -207,36 +207,36 @@ export default function ComparisonTable() {
   ];
 
   return (
-    <section className="mx-auto max-w-6xl xl:max-w-7xl px-4 sm:px-12 w-full py-10">
+    <section className="mx-auto max-w-6xl xl:max-w-7xl px-4 sm:px-6 lg:px-12 w-full py-10">
       <div className="rounded-3xl bg-white">
-        <div className="bg-white text-center pt-[12px] pb-2">
+        <div className="bg-white text-center pt-6 pb-4 px-4 rounded-t-3xl">
           <div className="inline-flex items-center justify-center mb-3">
             <IconBadge alt="Resource Center" text="COMPRESSION" />
           </div>
-          <h2 className="text-[16px] sm:text-[36px] font-semibold text-[#232323]">
+          <h2 className="text-[20px] sm:text-[28px] lg:text-[36px] font-semibold text-[#232323]">
             Compare feature across subscription
           </h2>
         </div>
 
         {/* Desktop table */}
         <div className="hidden md:block">
-          <table className="w-full text-left border-collapse min-w-[750px]">
+          <table className="w-full text-left border-collapse">
             <thead
-              className="sticky z-20 bg-white"
+              className="sticky z-20 bg-white border-b border-[#EEEEEE]"
               style={{ top: NAVBAR_OFFSET_PX }}
             >
               <tr>
-                <th className="p-4 w-2/6"></th>
+                <th className="p-3 lg:p-4 w-2/6"></th>
                 {plans.map((plan) => {
                   const isSelected = selectedPlan === plan.key;
                   return (
-                    <th key={plan.key} className="p-4 text-center w-1/6">
-                      <span className="block text-[20px] sm:text-[21px] font-semibold text-[#232323] mb-3">
+                    <th key={plan.key} className="p-3 lg:p-4 text-center w-1/6">
+                      <span className="block text-[17px] lg:text-[21px] font-semibold text-[#232323] mb-3">
                         {plan.label}
                       </span>
                       <button
                         onClick={() => setSelectedPlan(plan.key)}
-                        className={`w-full h-[38px] px-4 rounded-full font-semibold text-[9px] lg:text-[14px] transition-colors flex items-center justify-center box-border ${isSelected
+                        className={`w-full h-[38px] px-2 lg:px-4 rounded-full font-semibold text-[11px] lg:text-[14px] transition-colors flex items-center justify-center box-border ${isSelected
                           ? "bg-[#95EA00] text-[#232323] border-2 border-[#74D800] hover:bg-[#85d400]"
                           : "bg-gray-50/50 border border-[#CBCBCB] text-[#4F4F4F] font-medium hover:bg-gray-100"
                           }`}
@@ -255,7 +255,7 @@ export default function ComparisonTable() {
                   <tr className="bg-[#FAFAFA] border-b border-[#EEEEEE]">
                     <td
                       colSpan={5}
-                      className="py-2.5 px-6 text-[18px] font-medium text-[#404040] tracking-wide"
+                      className="py-2.5 px-4 lg:px-6 text-[15px] lg:text-[18px] font-medium text-[#404040] tracking-wide"
                     >
                       {category.title}
                     </td>
@@ -265,7 +265,7 @@ export default function ComparisonTable() {
                       key={featIdx}
                       className="border-b border-[#EEEEEE] hover:bg-gray-50/50 transition-colors"
                     >
-                      <td className="py-3.5 px-6 text-[13px] sm:text-[18px] font-medium text-[#404040]">
+                      <td className="py-3.5 px-4 lg:px-6 text-[13px] lg:text-[18px] font-medium text-[#404040]">
                         {feature.name}
                       </td>
                       {plans.map((plan, pIdx) => {
@@ -273,24 +273,24 @@ export default function ComparisonTable() {
                         return (
                           <td
                             key={pIdx}
-                            className="py-3.5 px-4 text-center text-xs font-medium"
+                            className="py-3.5 px-2 lg:px-4 text-center text-xs font-medium"
                           >
                             {typeof val === "boolean" ? (
                               val ? (
                                 <div className="inline-flex items-center justify-center">
-                                  <IoIosCheckmarkCircleOutline className="text-[#63B800] text-base" />
+                                  <IoIosCheckmarkCircleOutline className="text-[#63B800] text-base lg:text-xl" />
                                 </div>
                               ) : (
-                                <span className="text-[#404040] text-[20px] font-medium">
+                                <span className="text-[#404040] text-[18px] lg:text-[20px] font-medium">
                                   —
                                 </span>
                               )
                             ) : feature.badge && val ? (
-                              <span className="inline-block px-3 py-0.5 text-[12px] font-medium text-[#529900] bg-[#86DF1F21] rounded-full">
+                              <span className="inline-block px-2 lg:px-3 py-0.5 text-[11px] lg:text-[12px] font-medium text-[#529900] bg-[#86DF1F21] rounded-full">
                                 {val}
                               </span>
                             ) : (
-                              <span className="font-medium text-[#417900] text-[20px]">
+                              <span className="font-medium text-[#417900] text-[16px] lg:text-[20px]">
                                 {val}
                               </span>
                             )}
