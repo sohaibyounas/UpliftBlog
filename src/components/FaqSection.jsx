@@ -9,7 +9,7 @@ export default function FaqSection({ faqs = pricingFaqs }) {
   const [expandedFaq, setExpandedFaq] = useState("");
 
   return (
-    <section className="max-w-3xl mx-auto px-[20px] sm:px-0 pt-15">
+    <section className="max-w-3xl mx-auto px-[20px] sm:pl-10 pt-15">
       <div className="mb-10">
         <IconBadge alt="Resource Center" text="FAQ" />
         <h2 className="text-[20px] sm:text-[36px] font-semibold text-[#232323] mt-4">
@@ -23,11 +23,10 @@ export default function FaqSection({ faqs = pricingFaqs }) {
           return (
             <div
               key={index}
-              className={`border rounded-[16px] transition-all duration-300 overflow-hidden ${
-                isOpen
-                  ? "border-[#EEEEEE] bg-[#FAFAFA]"
-                  : "border-[#F6F6F6] bg-[#FAFAFA]"
-              }`}
+              className={`border rounded-[16px] transition-all duration-300 overflow-hidden ${isOpen
+                ? "border-[#EEEEEE] bg-[#FAFAFA]"
+                : "border-[#F6F6F6] bg-[#FAFAFA]"
+                }`}
             >
               <button
                 onClick={() => setExpandedFaq(isOpen ? "" : index)}
@@ -46,9 +45,8 @@ export default function FaqSection({ faqs = pricingFaqs }) {
                 </div>
               </button>
               <div
-                className={`transition-all duration-500 ease-in-out overflow-hidden ${
-                  isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
-                }`}
+                className={`transition-all duration-500 ease-in-out overflow-hidden ${isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+                  }`}
               >
                 <div className="px-3 pb-5 text-[12px] sm:text-[16px] text-[#404040] font-medium leading-relaxed">
                   {faq.answer}

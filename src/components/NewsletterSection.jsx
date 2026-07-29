@@ -50,10 +50,14 @@ export default function NewsletterSection() {
 
           {/* Form */}
           <div className="w-full lg:max-w-[560px]">
+            {error && (
+              <p className="text-red-300 text-sm mb-1 text-center lg:text-left">
+                {error}
+              </p>
+            )}
             <div
-              className={`flex flex-col sm:flex-row items-center border rounded-[20px] sm:rounded-full p-2 gap-2 sm:gap-0 transition-colors ${
-                error ? "border-red-400" : "border-white"
-              }`}
+              className={`flex flex-col sm:flex-row items-center border rounded-[20px] sm:rounded-full p-2 gap-2 sm:gap-0 transition-colors ${error ? "border-red-400" : "border-white"
+                }`}
             >
               <input
                 type="email"
@@ -77,11 +81,6 @@ export default function NewsletterSection() {
               />
             </div>
 
-            {error && (
-              <p className="text-red-300 text-sm mt-2 text-center lg:text-left">
-                {error}
-              </p>
-            )}
           </div>
         </div>
       </div>

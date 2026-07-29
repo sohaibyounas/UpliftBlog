@@ -231,16 +231,15 @@ export default function ComparisonTable() {
                   const isSelected = selectedPlan === plan.key;
                   return (
                     <th key={plan.key} className="p-4 text-center w-1/6">
-                      <span className="block text-[20px] sm:text-[22px] font-semibold text-[#232323] mb-3">
+                      <span className="block text-[20px] sm:text-[21px] font-semibold text-[#232323] mb-3">
                         {plan.label}
                       </span>
                       <button
                         onClick={() => setSelectedPlan(plan.key)}
-                        className={`w-full h-[38px] px-4 rounded-full font-semibold text-[9px] lg:text-[16px] transition-colors flex items-center justify-center box-border ${
-                          isSelected
-                            ? "bg-[#95EA00] text-[#232323] border-2 border-[#74D800] hover:bg-[#85d400]"
-                            : "bg-gray-50/50 border border-[#CBCBCB] text-[#4F4F4F] font-medium hover:bg-gray-100"
-                        }`}
+                        className={`w-full h-[38px] px-4 rounded-full font-semibold text-[9px] lg:text-[14px] transition-colors flex items-center justify-center box-border ${isSelected
+                          ? "bg-[#95EA00] text-[#232323] border-2 border-[#74D800] hover:bg-[#85d400]"
+                          : "bg-gray-50/50 border border-[#CBCBCB] text-[#4F4F4F] font-medium hover:bg-gray-100"
+                          }`}
                       >
                         Choose Plan
                       </button>
@@ -312,18 +311,17 @@ export default function ComparisonTable() {
             className="sticky z-20 bg-white pt-2 pb-3"
             style={{ top: NAVBAR_OFFSET_PX }}
           >
-            <div className="flex flex-wrap justify-center gap-2">
+            <div className="flex flex-wrap justify-start gap-2">
               {plans.map((plan) => {
                 const isSelected = selectedPlan === plan.key;
                 return (
                   <button
                     key={plan.key}
                     onClick={() => setSelectedPlan(plan.key)}
-                    className={`w-[110px] shrink-0 h-[40px] px-1 rounded-full font-semibold text-[11px] whitespace-nowrap transition-colors flex items-center justify-center box-border text-center ${
-                      isSelected
-                        ? "bg-[#95EA00] text-[#232323] border-2 border-[#74D800]"
-                        : "bg-gray-50/50 border border-[#CBCBCB] text-[#4F4F4F] font-medium"
-                    }`}
+                    className={`w-[110px] shrink-0 h-[40px] px-1 rounded-full font-semibold text-[11px] whitespace-nowrap transition-colors flex items-center justify-center box-border text-center ${isSelected
+                      ? "bg-[#95EA00] text-[#232323] border-2 border-[#74D800]"
+                      : "bg-gray-50/50 border border-[#CBCBCB] text-[#4F4F4F] font-medium"
+                      }`}
                   >
                     {plan.label}
                   </button>

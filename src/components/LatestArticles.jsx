@@ -122,11 +122,10 @@ export default function LatestArticles() {
               key={tab}
               onClick={() => setActiveTab(tab)}
               className={`px-[10px] py-[3px] w-[90px] h-[38px] rounded-full border transition-all duration-300 text-[16px] font-semibold
-              ${
-                activeTab === tab
+              ${activeTab === tab
                   ? "bg-[#232323] text-white border-2 border-[#232323]"
                   : "bg-white border-[#D9D9D9] text-[#232323]"
-              }`}
+                }`}
             >
               {tab}
             </button>

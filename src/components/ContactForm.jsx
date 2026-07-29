@@ -117,8 +117,16 @@ export default function ContactForm() {
         <FormField
           label="Current Number of Clients"
           name="audienceSize"
+          type="number"
+          min="0"
+          max="10000"
           value={formData.audienceSize}
           onChange={handleChange}
+          onKeyDown={(e) => {
+            if (["e", "E", "+", "-", "."].includes(e.key)) {
+              e.preventDefault();
+            }
+          }}
           error={errors.audienceSize}
           placeholder="e.g. 35"
         />
