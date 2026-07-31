@@ -1,5 +1,9 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
+import { motion } from "motion/react";
+import { fadeUp, cardContainer, cardItem } from "@/hooks/animations";
 
 const logoipsumDark1 = "/images/logoipsumDark.svg";
 const logoipsumDark2 = "/images/logoipsumDark2.svg";
@@ -26,14 +30,27 @@ export default function TrustedBrands() {
 
   return (
     <section className="w-full mx-auto px-6 pt-13 text-center">
-      <h3 className="text-[15px] sm:text-[24px] font-black text-[#232323] tracking-wide uppercase mb-10">
+      <motion.h3
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.5 }}
+        variants={fadeUp}
+        className="text-[15px] sm:text-[24px] font-black text-[#232323] tracking-wide uppercase mb-10"
+      >
         POWERED BY TRUSTED BRANDS
-      </h3>
+      </motion.h3>
 
-      <div className="flex flex-wrap justify-center gap-4 w-full max-w-[1100px] mx-auto lg:basis-full">
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={cardContainer}
+        className="flex flex-wrap justify-center gap-4 w-full max-w-[1100px] mx-auto lg:basis-full"
+      >
         {brands.map((brand, idx) => (
-          <div
+          <motion.div
             key={idx}
+            variants={cardItem}
             className={`flex items-center justify-center px-6 py-3 rounded-full transition-colors basis-[45%] sm:basis-[30%] lg:basis-auto ${
               brand.active ? "bg-[#18181b]" : "bg-white"
             }`}
@@ -54,9 +71,9 @@ export default function TrustedBrands() {
               style={{ width: "135.46px", height: "21.33px" }}
               className="object-contain"
             />
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 }

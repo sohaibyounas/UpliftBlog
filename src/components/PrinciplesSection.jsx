@@ -1,5 +1,9 @@
+"use client";
+
 import React from "react";
+import { motion } from "motion/react";
 import IconBadge from "./IconBadge";
+import { fadeUp, cardContainer, cardItem } from "@/hooks/animations";
 
 export default function PrinciplesSection() {
   const principles = [
@@ -38,7 +42,13 @@ export default function PrinciplesSection() {
   return (
     <section className="mx-auto max-w-6xl xl:max-w-7xl px-4 sm:px-12 pt-15">
       {/* header */}
-      <div className="mb-14">
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.4 }}
+        variants={fadeUp}
+        className="mb-14"
+      >
         <IconBadge text="WHAT WE BELIEVE" />
         <h2 className="text-[22px] sm:text-[36px] font-bold text-[#18181b] tracking-tight mt-6 mb-4 max-w-lg leading-tight">
           The principles behind every decision we make.
@@ -47,13 +57,20 @@ export default function PrinciplesSection() {
           These aren't posters on a wall — they're how we prioritize the
           roadmap, talk to customers, and decide what not to build.
         </p>
-      </div>
+      </motion.div>
 
-      {/* card */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* cards */}
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.1 }}
+        variants={cardContainer}
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+      >
         {principles.map((item, idx) => (
-          <div
+          <motion.div
             key={idx}
+            variants={cardItem}
             className={`bg-[#FAFAFA] rounded-[24px] p-[24px] border border-[#E7E7E7] flex flex-col justify-start ${item.gridClass}`}
           >
             <span
@@ -71,9 +88,9 @@ export default function PrinciplesSection() {
             <p className="text-[11px] sm:text-[14px] text-[#404040] space-y-[14px] font-medium leading-relaxed">
               {item.desc}
             </p>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 }

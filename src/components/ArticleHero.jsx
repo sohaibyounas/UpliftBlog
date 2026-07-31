@@ -3,7 +3,9 @@
 import Image from "next/image";
 import { useState } from "react";
 import { IoIosArrowForward } from "react-icons/io";
+import { motion } from "motion/react";
 import CustomButton from "./CustomButton";
+import { fadeUp } from "@/hooks/animations";
 
 const slides = [
   {
@@ -39,7 +41,13 @@ export default function ArticleHero() {
   return (
     <section className="mx-auto max-w-6xl xl:max-w-7xl px-4 sm:px-12 py-8">
       {/* Title */}
-      <div className="mb-6">
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.4 }}
+        variants={fadeUp}
+        className="mb-6"
+      >
         <div className="flex items-center gap-3 mb-3">
           <span className="inline-flex items-center justify-center px-3.5 py-1 rounded-full bg-[#04441E] text-white text-[16px] sm:text-sm font-medium">
             Featured
@@ -67,10 +75,16 @@ export default function ArticleHero() {
             className="self-start sm:self-auto flex-shrink-0 px-[14px] py-[10px]"
           />
         </div>
-      </div>
+      </motion.div>
 
       {/* Image Slider */}
-      <div className="relative w-full rounded-[32px] overflow-hidden h-56 sm:h-80 lg:h-[420px] group bg-gray-100">
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={fadeUp}
+        className="relative w-full rounded-[32px] overflow-hidden h-56 sm:h-80 lg:h-[420px] group bg-gray-100"
+      >
         {/* Left Navigation Arrow */}
         <button
           onClick={handlePrev}
@@ -128,7 +142,7 @@ export default function ArticleHero() {
             />
           ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

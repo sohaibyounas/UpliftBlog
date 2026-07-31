@@ -1,10 +1,45 @@
 "use client";
 
 import React, { useState } from "react";
+import { motion } from "motion/react";
 import IconBadge from "./IconBadge";
 import { IoIosCheckmarkCircleOutline } from "react-icons/io";
 
 const NAVBAR_OFFSET_PX = 80;
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (delay = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, delay, ease: [0.25, 0.1, 0.25, 1] },
+  }),
+};
+
+const categoryVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] },
+  },
+};
+
+const rowContainer = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.05 },
+  },
+};
+
+const rowItem = {
+  hidden: { opacity: 0, x: -10 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.4, ease: [0.25, 0.1, 0.25, 1] },
+  },
+};
 
 export default function ComparisonTable() {
   const [selectedPlan, setSelectedPlan] = useState("trial");
@@ -209,14 +244,20 @@ export default function ComparisonTable() {
   return (
     <section className="mx-auto max-w-6xl xl:max-w-7xl px-4 sm:px-6 lg:px-12 w-full py-10">
       <div className="rounded-3xl bg-white">
-        <div className="bg-white text-center pt-6 pb-4 px-4 rounded-t-3xl">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.5 }}
+          variants={fadeUp}
+          className="bg-white text-center pt-6 pb-4 px-4 rounded-t-3xl"
+        >
           <div className="inline-flex items-center justify-center mb-3">
             <IconBadge alt="Resource Center" text="COMPRESSION" />
           </div>
           <h2 className="text-[20px] sm:text-[28px] lg:text-[36px] font-semibold text-[#232323]">
             Compare feature across subscription
           </h2>
-        </div>
+        </motion.div>
 
         {/* Desktop table */}
         <div className="hidden md:block">
@@ -234,74 +275,84 @@ export default function ComparisonTable() {
                       <span className="block text-[17px] lg:text-[21px] font-semibold text-[#232323] mb-3">
                         {plan.label}
                       </span>
-                      <button
+                      <motion.button
                         onClick={() => setSelectedPlan(plan.key)}
-                        className={`w-full h-[38px] px-2 lg:px-4 rounded-full font-semibold text-[11px] lg:text-[14px] transition-colors flex items-center justify-center box-border ${isSelected
-                          ? "bg-[#95EA00] text-[#232323] border-2 border-[#74D800] hover:bg-[#85d400]"
-                          : "bg-gray-50/50 border border-[#CBCBCB] text-[#4F4F4F] font-medium hover:bg-gray-100"
-                          }`}
+                        whileTap={{ scale: 0.95 }}
+                        className={`w-full h-[38px] px-2 lg:px-4 rounded-full font-semibold text-[11px] lg:text-[14px] transition-colors flex items-center justify-center box-border ${
+                          isSelected
+                            ? "bg-[#95EA00] text-[#232323] border-2 border-[#74D800] hover:bg-[#85d400]"
+                            : "bg-gray-50/50 border border-[#CBCBCB] text-[#4F4F4F] font-medium hover:bg-gray-100"
+                        }`}
                       >
                         Choose Plan
-                      </button>
+                      </motion.button>
                     </th>
                   );
                 })}
               </tr>
             </thead>
 
-            <tbody>
-              {comparisonCategories.map((category, catIdx) => (
-                <React.Fragment key={catIdx}>
-                  <tr className="bg-[#FAFAFA] border-b border-[#EEEEEE]">
-                    <td
-                      colSpan={5}
-                      className="py-2.5 px-4 lg:px-6 text-[15px] lg:text-[18px] font-medium text-[#404040] tracking-wide"
-                    >
-                      {category.title}
+            {comparisonCategories.map((category, catIdx) => (
+              <motion.tbody
+                key={catIdx}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.1 }}
+                variants={rowContainer}
+              >
+                <motion.tr
+                  variants={categoryVariants}
+                  className="bg-[#FAFAFA] border-b border-[#EEEEEE]"
+                >
+                  <td
+                    colSpan={5}
+                    className="py-2.5 px-4 lg:px-6 text-[15px] lg:text-[18px] font-medium text-[#404040] tracking-wide"
+                  >
+                    {category.title}
+                  </td>
+                </motion.tr>
+                {category.features.map((feature, featIdx) => (
+                  <motion.tr
+                    key={featIdx}
+                    variants={rowItem}
+                    className="border-b border-[#EEEEEE] hover:bg-gray-50/50 transition-colors"
+                  >
+                    <td className="py-3.5 px-4 lg:px-6 text-[13px] lg:text-[18px] font-medium text-[#404040]">
+                      {feature.name}
                     </td>
-                  </tr>
-                  {category.features.map((feature, featIdx) => (
-                    <tr
-                      key={featIdx}
-                      className="border-b border-[#EEEEEE] hover:bg-gray-50/50 transition-colors"
-                    >
-                      <td className="py-3.5 px-4 lg:px-6 text-[13px] lg:text-[18px] font-medium text-[#404040]">
-                        {feature.name}
-                      </td>
-                      {plans.map((plan, pIdx) => {
-                        const val = feature[plan.key];
-                        return (
-                          <td
-                            key={pIdx}
-                            className="py-3.5 px-2 lg:px-4 text-center text-xs font-medium"
-                          >
-                            {typeof val === "boolean" ? (
-                              val ? (
-                                <div className="inline-flex items-center justify-center">
-                                  <IoIosCheckmarkCircleOutline className="text-[#63B800] text-base lg:text-xl" />
-                                </div>
-                              ) : (
-                                <span className="text-[#404040] text-[18px] lg:text-[20px] font-medium">
-                                  —
-                                </span>
-                              )
-                            ) : feature.badge && val ? (
-                              <span className="inline-block px-2 lg:px-3 py-0.5 text-[11px] lg:text-[12px] font-medium text-[#529900] bg-[#86DF1F21] rounded-full">
-                                {val}
-                              </span>
+                    {plans.map((plan, pIdx) => {
+                      const val = feature[plan.key];
+                      return (
+                        <td
+                          key={pIdx}
+                          className="py-3.5 px-2 lg:px-4 text-center text-xs font-medium"
+                        >
+                          {typeof val === "boolean" ? (
+                            val ? (
+                              <div className="inline-flex items-center justify-center">
+                                <IoIosCheckmarkCircleOutline className="text-[#63B800] text-base lg:text-xl" />
+                              </div>
                             ) : (
-                              <span className="font-medium text-[#417900] text-[16px] lg:text-[20px]">
-                                {val}
+                              <span className="text-[#404040] text-[18px] lg:text-[20px] font-medium">
+                                —
                               </span>
-                            )}
-                          </td>
-                        );
-                      })}
-                    </tr>
-                  ))}
-                </React.Fragment>
-              ))}
-            </tbody>
+                            )
+                          ) : feature.badge && val ? (
+                            <span className="inline-block px-2 lg:px-3 py-0.5 text-[11px] lg:text-[12px] font-medium text-[#529900] bg-[#86DF1F21] rounded-full">
+                              {val}
+                            </span>
+                          ) : (
+                            <span className="font-medium text-[#417900] text-[16px] lg:text-[20px]">
+                              {val}
+                            </span>
+                          )}
+                        </td>
+                      );
+                    })}
+                  </motion.tr>
+                ))}
+              </motion.tbody>
+            ))}
           </table>
         </div>
 
@@ -315,31 +366,43 @@ export default function ComparisonTable() {
               {plans.map((plan) => {
                 const isSelected = selectedPlan === plan.key;
                 return (
-                  <button
+                  <motion.button
                     key={plan.key}
                     onClick={() => setSelectedPlan(plan.key)}
-                    className={`w-[110px] shrink-0 h-[40px] px-1 rounded-full font-semibold text-[11px] whitespace-nowrap transition-colors flex items-center justify-center box-border text-center ${isSelected
-                      ? "bg-[#95EA00] text-[#232323] border-2 border-[#74D800]"
-                      : "bg-gray-50/50 border border-[#CBCBCB] text-[#4F4F4F] font-medium"
-                      }`}
+                    whileTap={{ scale: 0.95 }}
+                    className={`w-[110px] shrink-0 h-[40px] px-1 rounded-full font-semibold text-[11px] whitespace-nowrap transition-colors flex items-center justify-center box-border text-center ${
+                      isSelected
+                        ? "bg-[#95EA00] text-[#232323] border-2 border-[#74D800]"
+                        : "bg-gray-50/50 border border-[#CBCBCB] text-[#4F4F4F] font-medium"
+                    }`}
                   >
                     {plan.label}
-                  </button>
+                  </motion.button>
                 );
               })}
             </div>
           </div>
 
           {comparisonCategories.map((category, catIdx) => (
-            <div key={catIdx}>
-              <div className="bg-[#FAFAFA] border-b border-[#EEEEEE] py-2.5 px-2 text-[14px] font-medium text-[#404040] tracking-wide">
+            <motion.div
+              key={catIdx}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.1 }}
+              variants={rowContainer}
+            >
+              <motion.div
+                variants={categoryVariants}
+                className="bg-[#FAFAFA] border-b border-[#EEEEEE] py-2.5 px-2 text-[14px] font-medium text-[#404040] tracking-wide"
+              >
                 {category.title}
-              </div>
+              </motion.div>
               {category.features.map((feature, featIdx) => {
                 const val = feature[selectedPlan];
                 return (
-                  <div
+                  <motion.div
                     key={featIdx}
+                    variants={rowItem}
                     className="flex items-center justify-between gap-3 border-b border-[#EEEEEE] py-3 px-2"
                   >
                     <span className="text-[13px] font-medium text-[#404040]">
@@ -364,10 +427,10 @@ export default function ComparisonTable() {
                         </span>
                       )}
                     </span>
-                  </div>
+                  </motion.div>
                 );
               })}
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

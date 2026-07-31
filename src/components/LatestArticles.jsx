@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { motion, AnimatePresence } from "motion/react";
+import { fadeUp, cardContainer, cardItem } from "@/hooks/animations";
 
 const Card1 = "/images/Card1.svg";
 const Card2 = "/images/Card2.svg";
@@ -111,7 +113,13 @@ export default function LatestArticles() {
       className="mx-auto w-full px-4 lg:px-12 pt-11 scroll-mt-20"
     >
       {/* Header */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-14">
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.4 }}
+        variants={fadeUp}
+        className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-14"
+      >
         <h2 className="text-[36px] font-semibold text-[#232323]">
           Latest articles
         </h2>
@@ -122,63 +130,79 @@ export default function LatestArticles() {
               key={tab}
               onClick={() => setActiveTab(tab)}
               className={`px-[10px] py-[3px] w-[90px] h-[38px] rounded-full border transition-all duration-300 text-[16px] font-semibold
-              ${activeTab === tab
+              ${
+                activeTab === tab
                   ? "bg-[#232323] text-white border-2 border-[#232323]"
                   : "bg-white border-[#D9D9D9] text-[#232323]"
-                }`}
+              }`}
             >
               {tab}
             </button>
           ))}
         </div>
-      </div>
+      </motion.div>
 
       {/* Articles */}
-      <div
-        className="grid gap-x-[20px] gap-y-[24px] pb-[3px]"
-        style={{ gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))" }}
-      >
-        {filtered.map((article) => (
-          <Link
-            key={article.id}
-            href="/article-details"
-            className="group cursor-pointer block"
-          >
-            <article>
-              {/* Image */}
-              <div className="relative w-full aspect-[411/310] overflow-hidden rounded-[20px]">
-                <Image
-                  src={article.image}
-                  alt={article.title}
-                  width={600}
-                  height={400}
-                  className="w-full h-full object-cover transition duration-500 group-hover:scale-105"
-                />
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={activeTab}
+          initial="hidden"
+          animate="visible"
+          variants={cardContainer}
+          className="grid gap-x-[20px] gap-y-[24px] pb-[3px]"
+          style={{
+            gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+            maxWidth: "1200px",
+            margin: "0 auto", 
+          }}
+        >
+          {filtered.map((article) => (
+            <motion.div
+              key={article.id}
+              variants={cardItem}
+              className="w-full max-w-[380px] mx-auto"
+            >
+              <Link
+                href="/article-details"
+                className="group cursor-pointer block"
+              >
+                <article>
+                  {/* Image */}
+                  <div className="relative w-full aspect-[411/310] overflow-hidden rounded-[20px]">
+                    <Image
+                      src={article.image}
+                      alt={article.title}
+                      width={600}
+                      height={400}
+                      className="w-full h-full object-cover transition duration-500 group-hover:scale-105"
+                    />
 
-                {/* Date Badge */}
-                <div className="absolute left-1/2 bottom-4 translate-y-1/2 -translate-x-1/2 w-[182px] h-[33px]">
-                  <div className="bg-[#232323] rounded-t-[12px] px-6 py-2">
-                    <span className="text-[#8EFF0A] text-[16px] font-bold whitespace-nowrap">
-                      {article.date}
-                    </span>
+                    {/* Date Badge */}
+                    <div className="absolute left-1/2 bottom-4 translate-y-1/2 -translate-x-1/2 w-[182px] h-[33px]">
+                      <div className="bg-[#232323] rounded-t-[12px] px-6 py-2">
+                        <span className="text-[#8EFF0A] text-[16px] font-bold whitespace-nowrap">
+                          {article.date}
+                        </span>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
 
-              {/* Content */}
-              <div className="pt-5">
-                <h3 className="text-[#232323] text-[24px] font-bold leading-[100%] tracking-[-0.02em] group-hover:text-[#0A5A37] transition-colors">
-                  {article.title}
-                </h3>
+                  {/* Content */}
+                  <div className="pt-5">
+                    <h3 className="text-[#232323] text-[24px] font-bold leading-[100%] tracking-[-0.02em] group-hover:text-[#0A5A37] transition-colors">
+                      {article.title}
+                    </h3>
 
-                <p className="mt-2 text-[#666666] text-[14px] font-normal leading-[100%] tracking-[-0.01em] max-w-[420px]">
-                  {article.description}
-                </p>
-              </div>
-            </article>
-          </Link>
-        ))}
-      </div>
+                    <p className="mt-2 text-[#666666] text-[14px] font-normal leading-[100%] tracking-[-0.01em] max-w-[420px]">
+                      {article.description}
+                    </p>
+                  </div>
+                </article>
+              </Link>
+            </motion.div>
+          ))}
+        </motion.div>
+      </AnimatePresence>
     </section>
   );
 }

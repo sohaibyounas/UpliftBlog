@@ -78,7 +78,7 @@ export default function ContactForm() {
         className="space-y-4 sm:space-y-6"
         noValidate
       >
-        <div className="grid grid-cols-2 gap-3 sm:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-6">
           <FormField
             label="First Name"
             name="firstName"
@@ -97,7 +97,7 @@ export default function ContactForm() {
           />
         </div>
 
-        <div className="grid grid-cols-2 gap-3 sm:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-6">
           <FormField
             label="Email Address"
             name="email"
@@ -126,6 +126,9 @@ export default function ContactForm() {
             if (["e", "E", "+", "-", "."].includes(e.key)) {
               e.preventDefault();
             }
+          }}
+          onInput={(e) => {
+            if (e.target.value < 0) e.target.value = 0;
           }}
           error={errors.audienceSize}
           placeholder="e.g. 35"

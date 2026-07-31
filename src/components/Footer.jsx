@@ -220,7 +220,7 @@ export default function Footer() {
             alt="Upliftt Logo"
             width={529}
             height={117.9}
-            className="w-[350px] sm:w-[529px] h-[117.9px] object-contain"
+            className="w-[250px] md:w-[350px] lg:w-[529px] h-[117.9px] object-contain"
           />
         </div>
       </div>

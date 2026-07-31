@@ -43,7 +43,7 @@ export default function ContactImagePanel() {
             alt="Email"
             width={22}
             height={16}
-            className="w-5 h-4 sm:w-6 sm:h-[18px] shrink-0"
+            className="w-5 sm:w-6 h-auto shrink-0"
           />
           <div>
             <p className="text-[11px] sm:text-[13px] md:text-[14px] text-[#404040] font-medium tracking-wide">

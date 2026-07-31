@@ -1,5 +1,8 @@
 "use client";
 
+import { motion } from "motion/react";
+import { fadeUp } from "@/hooks/animations";
+
 const Twitter = "/icons/twitterIcon.svg";
 const Facebook = "/icons/facebookIcon.svg";
 const Linkedin = "/icons/linkedinIcon.svg";
@@ -61,7 +64,12 @@ export default function ArticleDetail() {
       id="articles-details"
       className="mx-auto max-w-6xl xl:max-w-7xl px-4 sm:px-12 pb-8 scroll-mt-20"
     >
-      <div>
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.15 }}
+        variants={fadeUp}
+      >
         {/* Yoga for beginners */}
         <h2 className="text-[18px] sm:text-[20px] font-medium text-[#232323] mb-3">
           6 great yoga poses for beginners
@@ -145,23 +153,63 @@ export default function ArticleDetail() {
         </div>
 
         {/* Share Today */}
-        <div className="flex flex-col items-center justify-center gap-3 pt-2">
+        <div className="flex flex-col items-center justify-center gap-5 pt-2">
           <h4 className="font-semibold text-[#232323] text-[16px] sm:text-[24px]">
             Share Today:
           </h4>
-          <div className="flex items-center gap-3">
-            {shareButtons.map(({ icon, label }) => (
+
+          <div className="flex items-center gap-4">
+            {[
+              {
+                icon: Facebook,
+                label: "Facebook",
+                color: "border-blue-500",
+                bg: "bg-blue-500",
+              },
+              {
+                icon: Twitter,
+                label: "Twitter",
+                color: "border-black",
+                bg: "bg-black",
+              },
+              {
+                icon: Linkedin,
+                label: "LinkedIn",
+                color: "border-sky-600",
+                bg: "bg-sky-600",
+              },
+              {
+                icon: Youtube,
+                label: "YouTube",
+                color: "border-red-500",
+                bg: "bg-red-500",
+              },
+            ].map(({ icon, label, color, bg }) => (
               <button
                 key={label}
                 aria-label={label}
-                className="flex items-center justify-center rounded-full border border-[#DCDCDC] p-[12px] hover:bg-[#94f029] transition-all duration-300 hover:scale-110 hover:-translate-y-1"
+                className="relative w-12 h-12 rounded-full group"
               >
-                <img src={icon} alt={label} className="w-[18px] h-[18px]" />
+                {/* Floating Circle */}
+                <div
+                  className={`absolute inset-0 rounded-full ${bg} transition-all duration-300 group-hover:-translate-y-8 group-hover:shadow-2xl`}
+                />
+
+                {/* Icon Circle */}
+                <div
+                  className={`relative z-10 flex h-full w-full items-center justify-center rounded-full border-2 ${color} bg-white transition-colors duration-300`}
+                >
+                  <img
+                    src={icon}
+                    alt={label}
+                    className="w-5 h-5 transition duration-300 group-hover:brightness-0"
+                  />
+                </div>
               </button>
             ))}
           </div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

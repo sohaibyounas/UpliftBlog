@@ -1,7 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "motion/react";
 import CustomButton from "./CustomButton";
+import { fadeUp } from "@/hooks/animations";
 
 export default function NewsletterSection() {
   const [email, setEmail] = useState("");
@@ -40,24 +42,39 @@ export default function NewsletterSection() {
       <div className="mx-auto max-w-6xl xl:max-w-7xl px-4 sm:px-12">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
           {/* Content */}
-          <div className="w-full lg:w-auto text-center lg:text-left">
-            <h2 className="text-white font-semibold leading-tight text-[24px] xs:text-[26px] sm:text-[30px] md:text-[34px] lg:text-[40px]">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.5 }}
+            variants={fadeUp}
+            custom={0}
+            className="w-full lg:w-auto text-center lg:text-left"
+          >
+            <h2 className="text-white font-semibold leading-tight text-[24px] xs:text-[26px] sm:text-[30px] md:text-[34px] lg:text-[36px]">
               Subscribe to our weekly
               <br className="hidden sm:block" />
               <span className="sm:inline block">newsletter today!</span>
             </h2>
-          </div>
+          </motion.div>
 
           {/* Form */}
-          <div className="w-full lg:max-w-[560px]">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.5 }}
+            variants={fadeUp}
+            custom={0.15}
+            className="w-full lg:max-w-[560px]"
+          >
             {error && (
               <p className="text-red-300 text-sm mb-1 text-center lg:text-left">
                 {error}
               </p>
             )}
             <div
-              className={`flex flex-col sm:flex-row items-center border rounded-[20px] sm:rounded-full p-2 gap-2 sm:gap-0 transition-colors ${error ? "border-red-400" : "border-white"
-                }`}
+              className={`flex flex-col sm:flex-row items-center border rounded-[20px] sm:rounded-full p-2 gap-2 h-auto sm:h-[50px] transition-colors ${
+                error ? "border-red-400" : "border-white"
+              }`}
             >
               <input
                 type="email"
@@ -77,11 +94,10 @@ export default function NewsletterSection() {
                 fullWidth={true}
                 onClick={handleSubscribe}
                 disabled={loading}
-                className="w-full sm:w-auto p-[8px] text-[15px] sm:text-base whitespace-nowrap disabled:opacity-60 disabled:cursor-not-allowed"
+                className="w-full h-[40px] sm:w-auto p-[8px] text-[15px] sm:text-base whitespace-nowrap disabled:opacity-60 disabled:cursor-not-allowed"
               />
             </div>
-
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

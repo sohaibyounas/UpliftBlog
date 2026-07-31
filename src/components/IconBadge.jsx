@@ -1,16 +1,41 @@
+const variants = {
+  default: {
+    iconBg: "#232323",
+    iconSrc: "/icons/resource-center.svg",
+    textColor: "#232323",
+  },
+  light: {
+    iconBg: "#8EFF0A",
+    iconSrc: "/icons/resource-dark.svg",
+    textColor: "#FFFFFF",
+  },
+};
+
 export default function IconBadge({
-  src = "/icons/resource-center.svg",
+  src,
   alt = "",
   size = "w-[13px] h-[16px]",
   text,
+  variant = "default",
 }) {
+  const v = variants[variant] ?? variants.default;
+  const resolvedSrc = src ?? v.iconSrc;
+
   return (
     <div className="flex items-center gap-3">
-      <div className="w-[30px] h-[30px] rounded-full bg-[#232323] p-[6.15px] flex items-center justify-center">
-        <img src={src} alt={alt} className={size} />
+      <div
+        className="w-[30px] h-[30px] rounded-full p-[6.15px] flex items-center justify-center"
+        style={{ backgroundColor: v.iconBg }}
+      >
+        <img src={resolvedSrc} alt={alt} className={size} />
       </div>
       {text && (
-        <span className="text-[20px] font-semibold text-[#232323]">{text}</span>
+        <span
+          className="text-[20px] font-semibold"
+          style={{ color: v.textColor }}
+        >
+          {text}
+        </span>
       )}
     </div>
   );

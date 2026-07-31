@@ -3,10 +3,21 @@
 import { useRef, useState, useEffect } from "react";
 import { IoIosArrowForward } from "react-icons/io";
 import Image from "next/image";
+import { motion } from "motion/react";
+import { fadeUp, cardContainer } from "@/hooks/animations";
 
 const Card1 = "/images/Card1.svg";
 const Card2 = "/images/Card2.svg";
 const Card3 = "/images/Card3.svg";
+
+const carouselCardItem = {
+  hidden: { opacity: 0, y: 24 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] },
+  },
+};
 
 const articles = [
   {
@@ -150,7 +161,13 @@ export default function MoreArticles() {
     <section className="w-full mx-auto px-4 sm:px-6 lg:px-8 py-3">
       <div className="mx-auto px-4 sm:px-6 lg:px-8">
         {/* header */}
-        <div className="flex flex-wrap items-center justify-between gap-4 sm:gap-6 mb-8">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.4 }}
+          variants={fadeUp}
+          className="flex flex-wrap items-center justify-between gap-4 sm:gap-6 mb-8"
+        >
           <h2 className="text-[22px] sm:text-[28px] md:text-[32px] lg:text-[36px] font-semibold text-[#232323]">
             More articles
           </h2>
@@ -160,18 +177,23 @@ export default function MoreArticles() {
             isAtStart={isAtStart}
             isAtEnd={isAtEnd}
           />
-        </div>
+        </motion.div>
 
         {/* Cards row */}
-        <div
+        <motion.div
           ref={scrollRef}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={cardContainer}
           className="flex flex-nowrap overflow-x-auto scrollbar-hidden gap-4 sm:gap-6 lg:gap-5 scroll-smooth snap-x snap-mandatory"
         >
           {articles.map((article) => (
-            <a
+            <motion.a
               key={article.id}
               href="#"
               data-card
+              variants={carouselCardItem}
               className="bg-white rounded-[16px] overflow-hidden transition-shadow group shrink-0 snap-start w-[85%] xs:w-[70%] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-14px)] 2xl:w-[calc(25%-15px)]"
             >
               {/* Thumbnail */}
@@ -194,9 +216,9 @@ export default function MoreArticles() {
                   {article.description}
                 </p>
               </div>
-            </a>
+            </motion.a>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

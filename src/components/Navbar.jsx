@@ -10,7 +10,7 @@ import CustomButton from "./CustomButton";
 const Logo = "/images/upliftlogo.svg";
 
 const navLinks = [
-  { label: "Features", href: "#", showPlus: true },
+  { label: "Features", href: "/features", showPlus: true },
   { label: "Pricing", href: "/pricing", showPlus: false },
   { label: "Resource", href: "/", showPlus: true },
   { label: "About Company", href: "about-company", showPlus: true },

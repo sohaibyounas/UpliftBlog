@@ -3,7 +3,7 @@ import Footer from "@/components/Footer";
 import "./globals.css";
 
 export const metadata = {
-  title: "UPLIFTT",
+  title: "UPLIFTT | WEBSITE",
   icons: {
     icon: "/images/uplifttFavicon.svg",
   },
