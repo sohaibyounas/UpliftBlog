@@ -13,18 +13,18 @@ export default function CustomButton({
   ...props
 }) {
   const baseButtonStyles =
-    "flex items-center gap-3 rounded-full text-[15px] transition-colors focus:outline-none";
+    "group flex items-center justify-between gap-3 rounded-full text-[15px] transition-colors focus:outline-none";
 
   const variants = {
     dark: "bg-black text-white hover:bg-gray-900 p-[6px] pl-6",
     primary: "bg-[#95EA00] text-[#18181b] hover:bg-[#85d400] p-[6px] pl-6",
     outline:
-      "border-2 border-[#DCDCDC] hover:bg-gray-50 py-[6px] pl-[10px] pr-[5px] gap-2",
+      "border-2 border-[#DCDCDC] hover:bg-gray-50 py-[6px] pl-[10px] pr-[6px] gap-2",
     green:
-      "bg-[#8EFF0A] border-2 border-[#74D800] hover:bg-[#7ce600] px-[10px] py-[3px] gap-2",
+      "bg-[#8EFF0A] border-2 border-[#63B800] hover:bg-[#7be302] py-[6px] pl-[14px] pr-[6px] gap-2",
     white:
-      "bg-white border-2 border-[#C6C6C6] hover:bg-gray-50 px-[10px] py-[3px] gap-2",
-    black: "bg-black border-none hover:bg-gray-900 px-[10px] py-[3px] gap-2",
+      "bg-white border-2 border-[#C6C6C6] hover:bg-gray-50 py-[6px] pl-[14px] pr-[6px] gap-2",
+    black: "bg-black border-none hover:bg-gray-900 py-[6px] pl-[14px] pr-[6px] gap-2",
   };
 
   const iconVariants = {
@@ -32,7 +32,7 @@ export default function CustomButton({
     primary: "bg-[#18181b] text-white w-8 h-8",
     outline: "bg-[#232323] text-white w-8 h-8",
     green: "bg-[#191919] text-white w-8 h-8",
-    white: "bg-transparent w-8 h-8",
+    white: "bg-transparent hover:bg-black hover:text-white w-8 h-8",
     black: "bg-[#93FF16] text-black w-8 h-8",
   };
 
@@ -62,7 +62,7 @@ export default function CustomButton({
         clsx(
           baseButtonStyles,
           variants[variant],
-          fullWidth ? "w-full justify-between" : "inline-flex",
+          fullWidth ? "w-full" : "inline-flex",
         ),
         className,
       )}
@@ -71,7 +71,7 @@ export default function CustomButton({
       <span className={`${textVariants[variant]}`}>{text}</span>
 
       <div
-        className={`rounded-full flex items-center justify-center shrink-0 transition-colors ${iconVariants[variant]}`}
+        className={`rounded-full flex items-center justify-center shrink-0 transition-all duration-300 ease-in-out group-hover:translate-x-1 ${iconVariants[variant]}`}
       >
         {icon ?? <LuChevronsRight className={iconSizeVariants[variant]} />}
       </div>

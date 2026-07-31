@@ -25,7 +25,7 @@ export default function Navbar() {
 
   return (
     <header className="fixed top-0 left-0 w-full bg-white z-[9999] ">
-      <div className="w-full mx-auto h-20 px-4 sm:px-10 lg:px-12 flex items-center justify-between relative">
+      <div className="w-full mx-auto h-20 px-4 sm:px-10 lg:px-12 flex items-center justify-between relative shadow-sm">
         {/* Logo */}
         <Link href="/" className="flex items-center">
           <Image
@@ -68,17 +68,17 @@ export default function Navbar() {
         <button
           type="button"
           onClick={toggleMenu}
-          className="lg:hidden p-2 text-[#232323] hover:text-[#0A5A37] focus:outline-none rounded-lg z-[10001] cursor-pointer transition-transform duration-200 active:scale-95"
+          className="rounded-full shadow-sm backdrop-blur-sm border-[#232323]/15 bg-white text-[#232323] hover:bg-[#232323]/5 lg:hidden p-2 text-[#232323] focus:outline-none z-[10001] cursor-pointer transition-transform duration-200 active:scale-95"
           aria-label="Toggle menu"
           aria-expanded={isOpen}
         >
           {isOpen ? (
             <LuX
-              size={30}
+              size={20}
               className="transition-all duration-300 rotate-0 hover:rotate-90"
             />
           ) : (
-            <LuMenu size={30} className="transition-all duration-300" />
+            <LuMenu size={20} className="transition-all duration-300" />
           )}
         </button>
       </div>
