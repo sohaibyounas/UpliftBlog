@@ -68,7 +68,7 @@ export default function CustomButton({
       )}
       {...props}
     >
-      <span className={`${textVariants[variant]}`}>{text}</span>
+      <span className={twMerge(clsx(textVariants[variant]), className)}>{text}</span>
 
       <div
         className={`rounded-full flex items-center justify-center shrink-0 transition-all duration-300 ease-in-out group-hover:translate-x-1 ${iconVariants[variant]}`}

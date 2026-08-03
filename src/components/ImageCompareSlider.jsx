@@ -2,7 +2,7 @@
 
 import { useState, useRef, useCallback, useEffect } from "react";
 import Image from "next/image";
-import { TbArrowsHorizontal } from "react-icons/tb";
+import { FiCode } from "react-icons/fi";
 
 export default function ImageCompareSlider({ beforeImg, afterImg }) {
   const containerRef = useRef(null);
@@ -91,16 +91,16 @@ export default function ImageCompareSlider({ beforeImg, afterImg }) {
 
       {/* Divider line */}
       <div
-        className={`absolute top-0 bottom-0 w-[2px] bg-white pointer-events-none ${transitionClass}`}
+        className={`absolute top-0 bottom-0 w-[3px] bg-white pointer-events-none ${transitionClass} `}
         style={{ left: `${sliderPos}%` }}
       />
 
       {/* Drag handle */}
       <div
-        className={`absolute top-1/2 flex items-center justify-center w-9 h-9 rounded-full bg-white shadow-md -translate-x-1/2 -translate-y-1/2 pointer-events-none ${transitionClass}`}
+        className={`absolute top-1/2 flex items-center justify-center w-9 h-9 rounded-full bg-white shadow-md -translate-x-1/2 -translate-y-1/2 cursor-e-resize ${transitionClass}`}
         style={{ left: `${sliderPos}%` }}
       >
-        <TbArrowsHorizontal className="text-[#232323] text-[18px]" />
+        <FiCode className="text-black text-[15px] pointer-events-auto" />
       </div>
 
       {/* Before pill */}

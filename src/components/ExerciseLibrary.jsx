@@ -101,7 +101,7 @@ export default function ExerciseLibrary() {
           <motion.div
             key={item.id}
             variants={cardItem}
-            className="rounded-[20px] overflow-hidden border border-gray-200/60 bg-white shadow-xs flex flex-col justify-between"
+            className="rounded-[20px] overflow-hidden border border-gray-200/60 bg-white flex flex-col justify-between"
           >
             {/* Draggable Before/After Compare Slider */}
             <ImageCompareSlider

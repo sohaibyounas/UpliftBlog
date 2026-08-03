@@ -85,10 +85,10 @@ export default function WorkoutBuilder() {
                   className="w-[24px] sm:w-[29.25px] h-[24px] sm:h-[29.25px] object-contain"
                 />
               </div>
-              <h3 className="font-semibold mb-2 text-[14px] sm:text-[20px] text-[#232323]">
+              <h3 className="font-semibold mb-2 text-[14px] sm:text-[14px] lg:text-[20px] text-[#232323]">
                 {item.title}
               </h3>
-              <p className="font-medium leading-relaxed text-[#404040] text-[11px] sm:text-[15px]">
+              <p className="font-medium leading-relaxed text-[#404040] text-[11px] sm:text-[12px] lg:text-[15px]">
                 {item.description}
               </p>
             </div>
