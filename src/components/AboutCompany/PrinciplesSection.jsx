@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "motion/react";
-import IconBadge from "./IconBadge";
+import IconBadge from "../IconBadge";
 import { fadeUp, cardContainer, cardItem } from "@/hooks/animations";
 
 export default function PrinciplesSection() {

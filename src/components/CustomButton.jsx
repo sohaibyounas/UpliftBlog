@@ -10,6 +10,9 @@ export default function CustomButton({
   className = "",
   onClick,
   icon,
+  isLoading = false,
+  loadingText = "Submitting...",
+  disabled = false,
   ...props
 }) {
   const baseButtonStyles =
@@ -24,7 +27,8 @@ export default function CustomButton({
       "bg-[#8EFF0A] border-2 border-[#63B800] hover:bg-[#7be302] py-[6px] pl-[14px] pr-[6px] gap-2",
     white:
       "bg-white border-2 border-[#C6C6C6] hover:bg-gray-50 py-[6px] pl-[14px] pr-[6px] gap-2",
-    black: "bg-black border-none hover:bg-gray-900 py-[6px] pl-[14px] pr-[6px] gap-2",
+    black:
+      "bg-black border-none hover:bg-gray-900 py-[6px] pl-[14px] pr-[6px] gap-2",
   };
 
   const iconVariants = {
@@ -54,26 +58,40 @@ export default function CustomButton({
     black: "w-4 h-4",
   };
 
+  const isDisabled = disabled || isLoading;
+
   return (
     <button
       type="button"
       onClick={onClick}
+      disabled={isDisabled}
       className={twMerge(
         clsx(
           baseButtonStyles,
           variants[variant],
           fullWidth ? "w-full" : "inline-flex",
+          isDisabled && "opacity-60 cursor-not-allowed",
         ),
         className,
       )}
       {...props}
     >
-      <span className={twMerge(clsx(textVariants[variant]), className)}>{text}</span>
+      <span className={twMerge(clsx(textVariants[variant]), className)}>
+        {isLoading ? loadingText : text}
+      </span>
 
       <div
-        className={`rounded-full flex items-center justify-center shrink-0 transition-all duration-300 ease-in-out group-hover:translate-x-1 ${iconVariants[variant]}`}
+        className={`rounded-full flex items-center justify-center shrink-0 transition-all duration-300 ease-in-out ${
+          !isLoading && "group-hover:translate-x-1"
+        } ${iconVariants[variant]}`}
       >
-        {icon ?? <LuChevronsRight className={iconSizeVariants[variant]} />}
+        {isLoading ? (
+          <span>
+            <div class="w-4 h-4 border-4 border-t-blue-500 border-gray-300 rounded-full animate-spin"></div>
+          </span>
+        ) : (
+          (icon ?? <LuChevronsRight className={iconSizeVariants[variant]} />)
+        )}
       </div>
     </button>
   );

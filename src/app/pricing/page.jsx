@@ -1,6 +1,6 @@
-import ComparisonTable from "@/components/ComparisonTable";
+import ComparisonTable from "@/components/Pricing/ComparisonTable";
 import FaqSection from "@/components/FaqSection";
-import PricingHero from "@/components/PricingHero";
+import PricingHero from "@/components/Pricing/PricingHero";
 import { pricingFaqs } from "@/hooks/pricingfaqs";
 
 export default function PricingPage() {

@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion } from "motion/react";
-import IconBadge from "./IconBadge";
+import IconBadge from "@/components/IconBadge";
 import { IoIosCheckmarkCircleOutline } from "react-icons/io";
 
 const NAVBAR_OFFSET_PX = 80;

@@ -1,6 +1,6 @@
-import ArticleHero from "@/components/ArticleHero";
-import ArticleDetail from "@/components/ArticleDetails";
-import MoreArticles from "@/components/MoreArticles";
+import ArticleHero from "@/components/ArticleDetails/ArticleHero";
+import ArticleDetail from "@/components/ArticleDetails/ArticleDetails";
+import MoreArticles from "@/components/ArticleDetails/MoreArticles";
 
 export default function ArticleDetailsPage() {
   return (

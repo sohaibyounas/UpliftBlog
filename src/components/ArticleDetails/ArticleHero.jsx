@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { IoIosArrowForward } from "react-icons/io";
 import { motion } from "motion/react";
-import CustomButton from "./CustomButton";
+import CustomButton from "@/components/CustomButton";
 import { fadeUp } from "@/hooks/animations";
 
 const slides = [

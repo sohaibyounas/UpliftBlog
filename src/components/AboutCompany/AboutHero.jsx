@@ -3,8 +3,8 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { motion } from "motion/react";
-import IconBadge from "./IconBadge";
-import CustomButton from "./CustomButton";
+import IconBadge from "../IconBadge";
+import CustomButton from "../CustomButton";
 import { fadeUp } from "@/hooks/animations";
 
 export default function AboutHero() {
@@ -93,7 +93,7 @@ export default function AboutHero() {
               .getElementById("contact-us")
               ?.scrollIntoView({ behavior: "smooth" })
           }
-          className="px-[16px] py-[10px] text-[15px] sm:text-base whitespace-nowrap"
+          className="px-[16px] py-[6px] pl-[8px] text-[15px] sm:text-base whitespace-nowrap"
         />
       </motion.div>
 

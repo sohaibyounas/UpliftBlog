@@ -3,7 +3,7 @@
 import React from "react";
 import { motion } from "motion/react";
 import ContactImagePanel from "./ContactImagePanel";
-import ContactForm from "./ContactForm";
+import ContactForm from "@/components/AboutCompany/ContactForm";
 import { fadeUp } from "@/hooks/animations";
 
 export default function ContactSection() {

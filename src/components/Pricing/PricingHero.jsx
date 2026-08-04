@@ -2,9 +2,9 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import IconBadge from "./IconBadge";
+import IconBadge from "@/components/IconBadge";
 import { IoIosCheckmarkCircleOutline, IoIosArrowDown } from "react-icons/io";
-import CustomButton from "./CustomButton";
+import CustomButton from "@/components/CustomButton";
 import { fadeUp, cardContainer, cardItem } from "@/hooks/animations";
 
 export default function PricingHero() {
@@ -298,7 +298,7 @@ export default function PricingHero() {
                   text={plan.buttonText}
                   fullWidth
                   variant={isSelected ? "green" : "outline"}
-                  className="py-[4px] pr-[9px] pl-[10px] mb-8"
+                  className="pr-[9px]"
                   onClick={(e) => {
                     e.stopPropagation();
                     setSelectedPlanIndex(planIdx);

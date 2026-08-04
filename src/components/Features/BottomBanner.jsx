@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { IoCheckmarkCircle } from "react-icons/io5";
-import CustomButton from "./CustomButton";
+import CustomButton from "@/components/CustomButton";
 import { fadeUp } from "@/hooks/animations";
 
 const MaskGroup = "/images/Maskgroup.svg";

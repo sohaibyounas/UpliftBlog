@@ -1,9 +1,9 @@
-import BottomBanner from "@/components/BottomBanner";
-import CalloutSection from "@/components/CalloutSection";
-import ExerciseLibrary from "@/components/ExerciseLibrary";
+import FeaturesHero from "@/components/Features/FeaturesHero";
+import CalloutSection from "@/components/Features/CalloutSection";
+import WorkoutBuilder from "@/components/Features/WorkoutBuilder";
+import ExerciseLibrary from "@/components/Features/ExerciseLibrary";
+import BottomBanner from "@/components/Features/BottomBanner";
 import FaqSection from "@/components/FaqSection";
-import FeaturesHero from "@/components/FeaturesHero";
-import WorkoutBuilder from "@/components/WorkoutBuilder";
 import { featuresFaq } from "@/hooks/featuresfaq";
 
 export default function FeaturesPage() {

@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from "motion/react";
-import IconBadge from "./IconBadge";
-import ImageCompareSlider from "./ImageCompareSlider";
+import IconBadge from "../IconBadge";
+import ImageCompareSlider from "../ImageCompareSlider";
 import { fadeUp, cardContainer, cardItem } from "@/hooks/animations";
 
 const before = "/images/before.jpg";

@@ -3,7 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "motion/react";
-import CustomButton from "./CustomButton";
+import CustomButton from "../CustomButton";
 import { fadeUp } from "@/hooks/animations";
 
 const MaskGroup = "/images/Maskgroup.svg";

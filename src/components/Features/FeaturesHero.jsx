@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "motion/react";
-import IconBadge from "./IconBadge";
+import IconBadge from "@/components/IconBadge";
 import { fadeUp } from "@/hooks/animations";
 
 const BackgroundImage = "/images/Framebg.svg";

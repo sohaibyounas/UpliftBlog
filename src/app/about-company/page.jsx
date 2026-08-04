@@ -1,9 +1,9 @@
-import AboutHero from "@/components/AboutHero";
-import ContactSection from "@/components/ContactSection";
-import CtaBanner from "@/components/CtaBanner";
+import AboutHero from "@/components/AboutCompany/AboutHero";
+import ContactSection from "@/components/AboutCompany/ContactSection";
+import CtaBanner from "@/components/AboutCompany/CtaBanner";
+import PrinciplesSection from "@/components/AboutCompany/PrinciplesSection";
+import TrustedBrands from "@/components/AboutCompany/TrustedBrands";
 import FaqSection from "@/components/FaqSection";
-import PrinciplesSection from "@/components/PrinciplesSection";
-import TrustedBrands from "@/components/TrustedBrands";
 import { aboutFaqs } from "@/hooks/aboutfaqs";
 
 export default function AboutCompany() {
