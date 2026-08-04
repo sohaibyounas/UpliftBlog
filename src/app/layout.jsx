@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import PageLoader from "@/components/PageLoader";
 import "./globals.css";
 
 export const metadata = {
@@ -16,6 +17,7 @@ export default function RootLayout({ children }) {
         className="font-sans min-h-screen flex flex-col scrollbar-hidden"
         suppressHydrationWarning
       >
+        <PageLoader />
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />

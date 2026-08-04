@@ -8,11 +8,11 @@ export default function FooterLinks() {
       { label: "Training", href: "#" },
       { label: "Forms & Check-Ins", href: "#" },
       { label: "Habits", href: "#" },
-      { label: "All Features", href: "#" },
+      { label: "All Features", href: "/features" },
       { label: "Pricing", href: "/pricing" },
     ],
     Resources: [
-      { label: "Blog", href: "/website/blog" },
+      { label: "Blog", href: "/" },
       { label: "Help Center", href: "#" },
       { label: "Watch a Demo", href: "#" },
       { label: "Find a Coach", href: "#" },
