@@ -67,7 +67,7 @@ export default function FooterBottom() {
             </button>
 
             {open && (
-              <div className="absolute bottom-0 mb-12 w-full sm:w-26 overflow-hidden rounded-2xl bg-[#04441E] z-50">
+              <div className="absolute bottom-0 mb-12 w-full sm:w-26 overflow-hidden rounded-2xl bg-[#04441E] z-50 border  border-[#1E5735]">
                 {languages.map((lang) => (
                   <button
                     key={lang}

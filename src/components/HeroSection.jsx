@@ -40,7 +40,7 @@ export default function HeroSection() {
                 .getElementById("latest-articles")
                 ?.scrollIntoView({ behavior: "smooth" })
             }
-            className="w-full px-[14px] py-[10px] text-[15px] sm:text-base whitespace-nowrap"
+            className="w-full px-[14px] py-[6px] text-[15px] sm:text-base whitespace-nowrap"
           />
         </div>
       </motion.div>

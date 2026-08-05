@@ -72,7 +72,7 @@ export default function ArticleHero() {
                 ?.scrollIntoView({ behavior: "smooth" })
             }
             style={{ cursor: "pointer" }}
-            className="self-start sm:self-auto flex-shrink-0 px-[14px] py-[10px]"
+            className="self-start sm:self-auto flex-shrink-0 px-[14px] py-[6px]"
           />
         </div>
       </motion.div>

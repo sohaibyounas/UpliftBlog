@@ -72,7 +72,7 @@ export default function NewsletterSection() {
               </p>
             )}
             <div
-              className={`flex flex-col sm:flex-row items-center border rounded-[20px] sm:rounded-full p-2 gap-2 h-auto sm:h-[50px] transition-colors ${
+              className={`flex flex-col sm:flex-row items-center border rounded-[20px] sm:rounded-full p-2 gap-2 h-auto sm:h-[60px] transition-colors ${
                 error ? "border-red-400" : "border-white"
               }`}
             >
