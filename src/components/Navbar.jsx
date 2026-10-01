@@ -12,8 +12,8 @@ const Logo = "/images/upliftlogo.svg";
 const navLinks = [
   { label: "Features", href: "/features", showPlus: true },
   { label: "Pricing", href: "/pricing", showPlus: false },
-  { label: "Resource", href: "/", showPlus: true },
-  { label: "About Company", href: "about-company", showPlus: true },
+  { label: "Resource", href: "/blog", showPlus: true },
+  { label: "About Company", href: "/about-company", showPlus: true },
 ];
 
 export default function Navbar() {

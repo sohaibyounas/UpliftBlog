@@ -5,31 +5,31 @@ import Link from "next/link";
 export default function FooterLinks() {
   const footerLinks = {
     Product: [
-      { label: "Training", href: "#" },
-      { label: "Forms & Check-Ins", href: "#" },
-      { label: "Habits", href: "#" },
+      { label: "Training", href: "/training" },
+      { label: "Forms & Check-Ins", href: "/forms-and-check-ins" },
+      { label: "Habits", href: "/habits" },
       { label: "All Features", href: "/features" },
       { label: "Pricing", href: "/pricing" },
     ],
     Resources: [
-      { label: "Blog", href: "/" },
-      { label: "Help Center", href: "#" },
-      { label: "Watch a Demo", href: "#" },
-      { label: "Find a Coach", href: "#" },
+      { label: "Blog", href: "/blog" },
+      { label: "Help Center", href: "/help-center" },
+      { label: "Watch a Demo", href: "/watch-a-demo" },
+      { label: "Find a Coach", href: "/find-a-coach" },
     ],
     Company: [
       { label: "About", href: "/about-company" },
-      { label: "Team", href: "#" },
-      { label: "Careers", href: "#" },
-      { label: "Contact", href: "#" },
-      { label: "Partners", href: "#" },
+      { label: "Team", href: "/team" },
+      { label: "Careers", href: "/careers" },
+      { label: "Contact", href: "/contact" },
+      { label: "Partners", href: "/partners" },
     ],
     Legal: [
-      { label: "Terms", href: "#" },
-      { label: "Privacy", href: "#" },
-      { label: "Cookies", href: "#" },
-      { label: "DPA", href: "#" },
-      { label: "Security", href: "#" },
+      { label: "Terms", href: "/terms" },
+      { label: "Privacy", href: "/privacy" },
+      { label: "Cookies", href: "/cookies" },
+      { label: "DPA", href: "/dpa" },
+      { label: "Security", href: "/security" },
     ],
   };
 
